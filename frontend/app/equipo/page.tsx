@@ -16,7 +16,7 @@ function EquipoContent() {
   const [elapsedSeconds, setElapsedSeconds] = useState<number | null>(null)
   const router = useRouter()
   const searchParams = useSearchParams()
-  const teamId = searchParams.get('id')
+  const teamId = searchParams?.get('id')
 
   // Función centralizada que carga TODO desde el admin API (sin RLS)
   const fetchTeamData = useCallback(async (id: string, isInitial = false) => {

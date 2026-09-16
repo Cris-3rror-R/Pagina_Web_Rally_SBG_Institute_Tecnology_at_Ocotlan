@@ -4,16 +4,6 @@ import { Equipo, Station, EquipoEstacion, TeamStationProgress, LeaderboardEntry 
 export const START_QR_CODE = 'AWS_RALLY_START_2026'
 export const FINISH_QR_CODE = 'AWS_RALLY_FINISH_2026'
 
-// Normalizar slug para emails únicos en Supabase Auth
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-z0-9]/g, '')
-    .slice(0, 20) || 'equipo'
-}
-
 /**
  * 1. CREAR EQUIPO
  * Solo requiere el nombre del equipo.

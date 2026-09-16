@@ -8,8 +8,8 @@ function DashboardRedirectContent() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    const type = searchParams.get('type')
-    const teamId = searchParams.get('id')
+    const type = searchParams?.get('type')
+    const teamId = searchParams?.get('id')
 
     if (type === 'admin') {
       router.replace('/admin')

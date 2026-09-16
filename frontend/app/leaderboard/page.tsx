@@ -131,11 +131,6 @@ export default function LeaderboardPage() {
                 ) : (
                   filteredEntries.map((entry, index) => {
                     const rank = index + 1
-                    const rankColors = [
-                      'text-[var(--sbg-orange)]',
-                      'text-[var(--text-secondary)]',
-                      'text-[var(--sbg-orange-dark)]',
-                    ]
 
                     return (
                       <tr
