@@ -14,28 +14,39 @@ export async function POST(request: Request) {
 
     const adminSupabase = createAdminClient()
     const timeValue = timestamp || new Date().toISOString()
+    const { data: current, error: currentError } = await adminSupabase
+      .from('equipos')
+      .select('equipo_id, tiempo_inicio, tiempo_final')
+      .eq('equipo_id', equipo_id)
+      .maybeSingle()
 
-    const updatePayload: Record<string, string> = {}
-    if (action === 'start') {
-      updatePayload.tiempo_inicio = timeValue
-    } else if (action === 'finish') {
-      updatePayload.tiempo_final = timeValue
+    if (currentError) {
+      return NextResponse.json({ error: currentError.message }, { status: 500 })
+    }
+    if (!current) {
+      return NextResponse.json({ error: 'Equipo no encontrado.' }, { status: 404 })
     }
 
-    let updateQuery = adminSupabase
+    if (action === 'start' && (current.tiempo_inicio || current.tiempo_final)) {
+      return NextResponse.json({ error: 'Este equipo ya inició el cronómetro.' }, { status: 409 })
+    }
+    if (action === 'finish' && current.tiempo_final) {
+      return NextResponse.json({ error: 'Este equipo ya detuvo el cronómetro.' }, { status: 409 })
+    }
+    if (action === 'finish' && !current.tiempo_inicio) {
+      return NextResponse.json({ error: 'El equipo debe iniciar el cronómetro antes de detenerlo.' }, { status: 409 })
+    }
+
+    const updatePayload = action === 'start'
+      ? { tiempo_inicio: timeValue }
+      : { tiempo_final: timeValue }
+
+    const { data: updated, error } = await adminSupabase
       .from('equipos')
       .update(updatePayload)
       .eq('equipo_id', equipo_id)
-
-    if (action === 'start') {
-      updateQuery = updateQuery.is('tiempo_inicio', null).is('tiempo_final', null)
-    } else {
-      updateQuery = updateQuery.is('tiempo_final', null).not('tiempo_inicio', 'is', null)
-    }
-
-    const { data: updated, error } = await updateQuery
       .select()
-      .maybeSingle()
+      .single()
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 })

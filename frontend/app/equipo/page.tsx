@@ -96,20 +96,31 @@ function EquipoContent() {
 
   // Cronómetro en tiempo real
   useEffect(() => {
-    if (!team?.tiempo_inicio) return
+    if (!team?.tiempo_inicio) {
+      setElapsedSeconds(null)
+      return
+    }
 
     // Si ya finalizó, calcular el tiempo total fijo
     if (team.tiempo_final) {
       const start = new Date(team.tiempo_inicio).getTime()
       const end = new Date(team.tiempo_final).getTime()
+      if (Number.isNaN(start) || Number.isNaN(end)) {
+        setElapsedSeconds(null)
+        return
+      }
       setElapsedSeconds(Math.max(0, Math.floor((end - start) / 1000)))
       return
     }
 
     // Si está en carrera, cronómetro en vivo
     const calcElapsed = () => {
-      const start = new Date(team.tiempo_inicio!).getTime()
-      setElapsedSeconds(Math.floor((Date.now() - start) / 1000))
+      const start = new Date(team.tiempo_inicio as string).getTime()
+      if (Number.isNaN(start)) {
+        setElapsedSeconds(null)
+        return
+      }
+      setElapsedSeconds(Math.max(0, Math.floor((Date.now() - start) / 1000)))
     }
     calcElapsed()
     const interval = setInterval(calcElapsed, 1000)

@@ -62,6 +62,8 @@ export default function AdminPage() {
       return
     }
     fetchTeams()
+    const interval = setInterval(fetchTeams, 5000)
+    return () => clearInterval(interval)
   }, [router])
 
   const handleCreateTeam = async (e: React.FormEvent) => {
@@ -252,37 +254,46 @@ export default function AdminPage() {
           </div>
 
           {/* LISTA DE EQUIPOS */}
-          <div className="md:col-span-2 space-y-4">
-            <h2 className="text-lg font-bold">Listado de Equipos</h2>
+          <div className="md:col-span-2 space-y-5">
+            <div className="flex items-end justify-between gap-3">
+              <div>
+                <h2 className="text-2xl font-extrabold">Gestión de equipos</h2>
+                <p className="text-sm text-[var(--text-secondary)] mt-1">Administra estaciones, puntos y progreso.</p>
+              </div>
+              <span className="text-xs text-[var(--text-secondary)]">Actualización automática</span>
+            </div>
             {loading ? (
               <div className="p-8 text-center text-[#8b949e]">Cargando equipos...</div>
             ) : teamsData.length === 0 ? (
               <div className="aws-card p-8 text-center text-[#8b949e]">No hay equipos creados aún.</div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
                 {teamsData.map(({ equipo, progress }) => {
                   const stationsCompleted = progress.filter(p => p.completado).length
                   return (
-                    <div key={equipo.equipo_id} className="aws-card p-5 flex flex-col hover:border-[#7c3aed] transition-colors group">
-                      <div className="flex items-start justify-between mb-2">
-                        <h3 className="font-bold text-[#f0f6fc] group-hover:text-[#7c3aed] transition-colors">{equipo.nombre}</h3>
+                    <div key={equipo.equipo_id} className="aws-card p-6 flex flex-col min-h-[220px] hover:border-[#7c3aed] transition-colors group">
+                      <div className="flex items-start justify-between mb-5">
+                        <div>
+                          <p className="text-xs uppercase tracking-wider text-[var(--text-secondary)] mb-1">Equipo</p>
+                          <h3 className="text-xl font-extrabold text-[#f0f6fc] group-hover:text-[#7c3aed] transition-colors">{equipo.nombre}</h3>
+                        </div>
                         <span className="text-xs text-[#8b949e] font-mono">{equipo.equipo_id.split('-')[0]}</span>
                       </div>
                       
                       <div className="flex items-center justify-between mt-auto pt-4">
                         <div>
                           <p className="text-xs text-[#8b949e] uppercase">Puntos</p>
-                          <p className="font-bold text-lg">{equipo.puntaje_total}</p>
+                          <p className="font-extrabold text-2xl text-[var(--sbg-orange)]">{equipo.puntaje_total}</p>
                         </div>
                         <div className="text-right">
                           <p className="text-xs text-[#8b949e] uppercase">Estaciones</p>
-                          <p className="font-bold text-lg">{stationsCompleted}/4</p>
+                          <p className="font-extrabold text-2xl text-[var(--sbg-blue)]">{stationsCompleted}/4</p>
                         </div>
                       </div>
 
                       <button
                         onClick={() => handleOpenGrading({ equipo, progress })}
-                        className="mt-4 w-full py-1.5 text-xs font-semibold rounded border border-[#21262d] text-[#8b949e] hover:bg-[#161b22] hover:text-[#f0f6fc] transition-colors"
+                        className="mt-5 w-full py-3 text-sm font-bold rounded-xl bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white hover:opacity-90 transition-opacity"
                       >
                         Gestionar Puntos
                       </button>
@@ -298,14 +309,14 @@ export default function AdminPage() {
       {/* MODAL GESTION PUNTOS */}
       {selectedTeam && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedTeam(null)}>
-          <div className="aws-card p-6 max-w-xl w-full relative shadow-2xl" onClick={e => e.stopPropagation()}>
+          <div className="aws-card p-7 sm:p-8 max-w-3xl w-full relative shadow-2xl" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setSelectedTeam(null)}
               className="absolute top-4 right-4 text-[#8b949e] hover:text-[#f0f6fc]"
             >
               ✕
             </button>
-            <h3 className="text-xl font-bold text-[#f0f6fc] mb-1">Calificar Equipo</h3>
+            <h3 className="text-2xl font-extrabold text-[#f0f6fc] mb-1">Gestionar puntos</h3>
             <p className="text-sm text-[#7c3aed] font-semibold mb-6">{selectedTeam.equipo.nombre}</p>
 
             {gradeError && (
@@ -314,14 +325,14 @@ export default function AdminPage() {
               </div>
             )}
 
-            <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[65vh] overflow-y-auto pr-2">
               {[1, 2, 3, 4].map(estacionId => (
-                <div key={estacionId} className="p-4 rounded-md border border-[#21262d] bg-[#0d1117] flex flex-col sm:flex-row sm:items-center gap-4">
+                <div key={estacionId} className="p-5 rounded-2xl border border-[#21262d] bg-[#0d1117] flex flex-col gap-5">
                   <div className="flex-1">
-                    <h4 className="font-semibold text-sm">Estación {estacionId}</h4>
+                    <h4 className="text-lg font-bold">Estación {estacionId}</h4>
                   </div>
                   
-                  <div className="flex items-center gap-4 flex-wrap">
+                  <div className="flex items-center justify-between gap-3 flex-wrap">
                     <label className="flex items-center gap-2 text-xs text-[#8b949e] cursor-pointer">
                       <input
                         type="checkbox"
@@ -337,14 +348,14 @@ export default function AdminPage() {
                         min="0"
                         value={stationScores[estacionId] || 0}
                         onChange={(e) => setStationScores({ ...stationScores, [estacionId]: parseInt(e.target.value) || 0 })}
-                        className="w-20 py-1 px-2 text-center text-sm"
+                        className="w-24 py-2 px-2 text-center text-base rounded-lg"
                       />
                       <span className="text-xs text-[#8b949e]">pts</span>
                     </div>
                     <button
                       onClick={() => handleSavePoints(estacionId)}
                       disabled={grading}
-                      className="px-3 py-1.5 text-xs font-semibold bg-[#7c3aed] text-white rounded hover:bg-[#6d28d9] transition-colors disabled:opacity-50"
+                      className="px-4 py-2.5 text-sm font-bold bg-[#7c3aed] text-white rounded-xl hover:bg-[#6d28d9] transition-colors disabled:opacity-50"
                     >
                       {grading ? '...' : 'Guardar'}
                     </button>

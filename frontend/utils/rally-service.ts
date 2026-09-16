@@ -159,6 +159,7 @@ export async function startTeamTimer(
   }
 
   const nowIso = new Date().toISOString()
+  let savedTimestamp = nowIso
 
   try {
     const response = await fetch('/api/timer', {
@@ -170,6 +171,7 @@ export async function startTeamTimer(
     if (!response.ok) {
       return { success: false, error: data.error || 'El cronómetro ya fue iniciado para este equipo.' }
     }
+    savedTimestamp = data.timestamp || nowIso
   } catch (err) {
     console.error('Error en API de inicio del cronómetro:', err)
     return { success: false, error: 'No se pudo iniciar el cronómetro. Comprueba la conexión.' }
@@ -181,7 +183,7 @@ export async function startTeamTimer(
     if (cached) {
       try {
         const parsed = JSON.parse(cached)
-        parsed.tiempo_inicio = nowIso
+        parsed.tiempo_inicio = savedTimestamp
         localStorage.setItem('rally_team_session', JSON.stringify(parsed))
       } catch {
         // ignore
@@ -189,7 +191,7 @@ export async function startTeamTimer(
     }
   }
 
-  return { success: true, timestamp: nowIso }
+  return { success: true, timestamp: savedTimestamp }
 }
 
 /**
@@ -207,6 +209,7 @@ export async function stopTeamTimer(
   }
 
   const nowIso = new Date().toISOString()
+  let savedTimestamp = nowIso
 
   try {
     const response = await fetch('/api/timer', {
@@ -218,6 +221,7 @@ export async function stopTeamTimer(
     if (!response.ok) {
       return { success: false, error: data.error || 'El cronómetro ya fue detenido para este equipo.' }
     }
+    savedTimestamp = data.timestamp || nowIso
   } catch (err) {
     console.error('Error en API de finalización del cronómetro:', err)
     return { success: false, error: 'No se pudo detener el cronómetro. Comprueba la conexión.' }
@@ -229,7 +233,7 @@ export async function stopTeamTimer(
     if (cached) {
       try {
         const parsed = JSON.parse(cached)
-        parsed.tiempo_final = nowIso
+        parsed.tiempo_final = savedTimestamp
         localStorage.setItem('rally_team_session', JSON.stringify(parsed))
       } catch {
         // ignore
@@ -237,7 +241,7 @@ export async function stopTeamTimer(
     }
   }
 
-  return { success: true, timestamp: nowIso }
+  return { success: true, timestamp: savedTimestamp }
 }
 
 /**
