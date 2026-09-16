@@ -68,12 +68,8 @@ export default function HomePage() {
       const email = cleanUser.includes('@') ? cleanUser : `${cleanUser}@rally.com`
       const { data, error } = await supabase.auth.signInWithPassword({ email, password: cleanPass })
       const isValidAdmin = !error && data.user
-      const isMasterAdmin =
-        (cleanUser === 'admin' && cleanPass === '1_Ch0col4t3__3t4Arf1shmi') ||
-        (cleanUser === 'admin' && cleanPass === 'AdminPassword123') ||
-        (cleanUser === 'admin@rally.com' && cleanPass === 'AdminPassword123')
 
-      if (isValidAdmin || isMasterAdmin) {
+      if (isValidAdmin) {
         if (typeof window !== 'undefined') {
           localStorage.setItem('rally_is_admin', 'true')
           localStorage.setItem('rally_admin_name', cleanUser)

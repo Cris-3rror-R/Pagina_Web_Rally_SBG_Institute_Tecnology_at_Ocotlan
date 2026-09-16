@@ -68,5 +68,6 @@ amplify/logs/
 
 # Secrets
 secrets.json
+SUPABASE_CREDENTIALS.md
 *.key
 *.pem

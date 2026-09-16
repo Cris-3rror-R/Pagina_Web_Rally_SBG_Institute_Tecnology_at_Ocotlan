@@ -65,18 +65,6 @@ export default function LoginPage() {
         return
       }
 
-      // Si el API falla pero las credenciales maestras del día del evento son correctas
-      const isMasterAdmin =
-        (cleanUser === 'nubia' && cleanPass === 'Cardenal1Tos_Ral1is') ||
-        (cleanUser === 'nubia@rally.com' && cleanPass === 'Cardenal1Tos_Ral1is')
-
-      if (isMasterAdmin) {
-        localStorage.setItem('rally_is_admin', 'true')
-        localStorage.setItem('rally_admin_name', cleanUser)
-        router.push('/admin')
-        return
-      }
-
       setAdminError(data.error || 'Usuario o contraseña incorrectos.')
     } catch (err) {
       setAdminError(err instanceof Error ? err.message : 'Error de conexión')
