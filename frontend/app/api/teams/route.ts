@@ -1,3 +1,4 @@
+import { randomBytes } from 'crypto'
 import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/utils/supabase/admin'
 
@@ -45,7 +46,7 @@ export async function POST(request: Request) {
     const email = `${cleanName.toLowerCase().replace(/[^a-z0-9]/g, '')}_${Date.now()}@rally.com`
     const { data: authData, error: authError } = await adminSupabase.auth.admin.createUser({
       email: email,
-      password: 'password123',
+      password: randomBytes(32).toString('hex'),
       email_confirm: true,
       user_metadata: {
         role: 'EQUIPO',
