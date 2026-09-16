@@ -50,7 +50,7 @@ export async function GET() {
         const mins = Math.floor((duracionSegundos % 3600) / 60)
         const secs = duracionSegundos % 60
         tiempoFormateado = [
-          hrs > 0 ? String(hrs).padStart(2, '0') : null,
+          String(hrs).padStart(2, '0'),
           String(mins).padStart(2, '0'),
           String(secs).padStart(2, '0'),
         ].filter(Boolean).join(':')

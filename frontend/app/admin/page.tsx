@@ -336,15 +336,16 @@ export default function AdminPage() {
               </div>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-[65vh] overflow-y-auto pr-2">
+            <div className="space-y-4 max-h-[65vh] overflow-y-auto pr-2">
               {[1, 2, 3, 4].map(estacionId => (
-                <div key={estacionId} className="p-5 rounded-2xl border border-[#21262d] bg-[#0d1117] flex flex-col gap-5">
-                  <div className="flex-1">
-                    <h4 className="text-lg font-bold">Estación {estacionId}</h4>
+                <div key={estacionId} className="p-5 sm:p-6 rounded-2xl border border-[#21262d] bg-[#0d1117] flex flex-col sm:flex-row sm:items-center gap-5">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs uppercase tracking-wider text-[#8b949e]">Estación</p>
+                    <h4 className="text-xl font-bold">Estación {estacionId}</h4>
                   </div>
                   
-                  <div className="flex items-center justify-between gap-3 flex-wrap">
-                    <label className="flex items-center gap-2 text-xs text-[#8b949e] cursor-pointer">
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <label className="flex items-center gap-2 text-sm text-[#8b949e] cursor-pointer">
                       <input
                         type="checkbox"
                         checked={stationCompleted[estacionId] || false}
@@ -354,13 +355,29 @@ export default function AdminPage() {
                       Completado
                     </label>
                     <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        aria-label={`Restar puntos de estación ${estacionId}`}
+                        onClick={() => setStationScores({ ...stationScores, [estacionId]: Math.max(0, (stationScores[estacionId] || 0) - 1) })}
+                        className="w-10 h-10 rounded-lg border border-[#30363d] text-xl font-bold hover:bg-[#161b22]"
+                      >
+                        −
+                      </button>
                       <input
                         type="number"
                         min="0"
                         value={stationScores[estacionId] || 0}
                         onChange={(e) => setStationScores({ ...stationScores, [estacionId]: parseInt(e.target.value) || 0 })}
-                        className="w-24 py-2 px-2 text-center text-base rounded-lg"
+                        className="w-24 h-10 py-2 px-2 text-center text-base rounded-lg"
                       />
+                      <button
+                        type="button"
+                        aria-label={`Sumar puntos de estación ${estacionId}`}
+                        onClick={() => setStationScores({ ...stationScores, [estacionId]: (stationScores[estacionId] || 0) + 1 })}
+                        className="w-10 h-10 rounded-lg border border-[#30363d] text-xl font-bold hover:bg-[#161b22]"
+                      >
+                        +
+                      </button>
                       <span className="text-xs text-[#8b949e]">pts</span>
                     </div>
                     <button

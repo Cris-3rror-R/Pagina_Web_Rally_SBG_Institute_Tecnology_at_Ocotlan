@@ -118,20 +118,21 @@ export default function LeaderboardPage() {
 
           {/* DATOS TABLA */}
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm whitespace-nowrap">
+            <table className="w-full min-w-[900px] text-left text-base whitespace-nowrap">
               <thead className="bg-[var(--sbg-dark)] text-[var(--text-secondary)] text-xs uppercase tracking-wider">
                 <tr>
                   <th className="py-3 px-4 font-semibold text-center w-16">Pos</th>
-                  <th className="py-3 px-4 font-semibold">Equipo</th>
-                  <th className="py-3 px-4 font-semibold text-center">Estaciones</th>
-                  <th className="py-3 px-4 font-semibold text-center">Tiempo</th>
-                  <th className="py-3 px-4 font-semibold text-right">Puntaje</th>
+                  <th className="py-4 px-5 font-semibold">Equipo</th>
+                  <th className="py-4 px-5 font-semibold text-center">Estaciones</th>
+                  <th className="py-4 px-5 font-semibold text-center">Tiempo</th>
+                  <th className="py-4 px-5 font-semibold text-center">Estado</th>
+                  <th className="py-4 px-5 font-semibold text-right">Puntaje total</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--sbg-dark-3)]">
                 {filteredEntries.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-16 text-center text-[var(--text-secondary)] text-sm">
+                    <td colSpan={6} className="py-16 text-center text-[var(--text-secondary)] text-sm">
                       {loading
                         ? <div className="flex items-center justify-center gap-3"><div className="w-5 h-5 rounded-full border-2 border-[var(--sbg-purple)] border-t-transparent animate-spin" /><span>Cargando equipos...</span></div>
                         : 'No hay equipos registrados aún.'}
@@ -155,8 +156,8 @@ export default function LeaderboardPage() {
                         </td>
 
                         {/* EQUIPO */}
-                        <td className="py-4 px-4">
-                          <p className={`font-bold text-base ${rank <= 3 ? 'text-[var(--sbg-blue)]' : 'text-[var(--text-primary)]'}`}>
+                        <td className="py-5 px-5">
+                          <p className={`font-bold text-lg ${rank <= 3 ? 'text-[var(--sbg-blue)]' : 'text-[var(--text-primary)]'}`}>
                             {entry.nombre}
                           </p>
                           <span className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block font-semibold
@@ -171,9 +172,9 @@ export default function LeaderboardPage() {
                         </td>
 
                         {/* PROGRESO */}
-                        <td className="py-4 px-4 text-center">
+                        <td className="py-5 px-5 text-center">
                           <div className="inline-flex flex-col items-center gap-1">
-                            <span className="font-bold text-sm">
+                            <span className="font-bold text-base">
                               {entry.estaciones_completadas}/4
                             </span>
                             <div className="flex gap-1">
@@ -188,12 +189,24 @@ export default function LeaderboardPage() {
                         </td>
 
                         {/* TIEMPO */}
-                        <td className="py-4 px-4 text-center font-mono text-sm text-[var(--text-secondary)]">
+                        <td className="py-5 px-5 text-center font-mono text-lg text-[var(--text-secondary)]">
                           {entry.tiempo_formateado}
                         </td>
 
+                        <td className="py-5 px-5 text-center">
+                          <span className={`inline-flex px-3 py-1 rounded-full text-sm font-bold ${
+                            entry.estado === 'finalizado'
+                              ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)]'
+                              : entry.estado === 'en_progreso'
+                              ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)]'
+                              : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
+                          }`}>
+                            {entry.estado === 'finalizado' ? 'Final' : entry.estado === 'en_progreso' ? 'Activo' : 'Esperando'}
+                          </span>
+                        </td>
+
                         {/* PUNTAJE */}
-                        <td className="py-4 px-4 text-right">
+                        <td className="py-5 px-5 text-right">
                           <span className={`font-extrabold text-xl ${
                             rank === 1 ? 'text-[var(--sbg-orange)]'
                             : rank === 2 ? 'text-[var(--text-secondary)]'

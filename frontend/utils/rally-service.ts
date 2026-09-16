@@ -446,7 +446,7 @@ export function formatDuration(seconds: number): string {
   const mins = Math.floor((seconds % 3600) / 60)
   const secs = seconds % 60
   return [
-    hrs > 0 ? hrs.toString().padStart(2, '0') : null,
+    hrs.toString().padStart(2, '0'),
     mins.toString().padStart(2, '0'),
     secs.toString().padStart(2, '0')
   ]
