@@ -56,7 +56,7 @@ app/
    └─ Redirige a /login
 
 3. Ingresa credenciales
-   ├─ admin / 1_Ch0col4t3__3t4Arf1shmi
+   ├─ admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
    └─ prueba / 1234567
 
 4. Supabase autentica
@@ -108,7 +108,7 @@ URL: http://localhost:3000/login
 
 Ingresa:
 ├─ Usuario: admin
-└─ Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+└─ Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 
 Click: "Iniciar Sesión"
 ```
@@ -258,7 +258,7 @@ URL:           https://kmfxpiphhjkxdrqiteqd.supabase.co
 Public Key:    sb_publishable_z-f5b22fliZ_aRfR1JTJNQ_BCy68Ybu
 Service Role:  [Guardada en SUPABASE_CREDENTIALS.md]
 
-Admin:         admin / 1_Ch0col4t3__3t4Arf1shmi
+Admin:         admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 Equipo:        prueba / 1234567
 ```
 

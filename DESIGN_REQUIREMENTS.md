@@ -18,7 +18,7 @@
 ### Usuario Admin
 ```
 Usuario: admin
-Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: ADMIN
 Acceso: Panel de control completo
 ```

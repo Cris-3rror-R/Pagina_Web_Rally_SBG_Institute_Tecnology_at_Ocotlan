@@ -36,7 +36,7 @@ Se actualizó completamente la estética y funcionalidad de la plataforma AWS CH
 - SUPABASE_URL=kmfxpiphhjkxdrqiteqd
 + SUPABASE_URL=https://kmfxpiphhjkxdrqiteqd.supabase.co
 
-- SUPABASE_SERVICE_ROLE_KEY=sb_secret_XJ_s8SkTWQLNlXtBvtQAjg_JX4k17-k
+- SUPABASE_SERVICE_ROLE_KEY=[SUPABASE_SERVICE_ROLE_KEY]
 + SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 + JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
@@ -211,7 +211,7 @@ pnpm dev
 **Admin**:
 ```
 Usuario: admin
-Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 ```
 
 **Equipo**:

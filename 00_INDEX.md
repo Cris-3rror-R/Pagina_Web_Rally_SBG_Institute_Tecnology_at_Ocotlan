@@ -45,7 +45,7 @@ PNPM_SECURITY.md
 ```
 AUTHENTICATION_SETUP.md
 ├─ Credenciales de prueba
-│  ├─ Admin: admin / 1_Ch0col4t3__3t4Arf1shmi
+│  ├─ Admin: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 │  └─ Equipo: prueba / 1234567
 ├─ Crear usuarios en Supabase
 ├─ JWT tokens
@@ -212,7 +212,7 @@ amplify.yml
 ```
 Admin:
 ├─ Usuario: admin
-├─ Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+├─ Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 └─ Rol: ADMIN
 
 Equipo:

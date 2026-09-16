@@ -101,7 +101,7 @@
 │   ║  [Entrar al Rally →] [Volver a seleccionar]    ║  │
 │   ║                                                    ║  │
 │   ║  ℹ️ Credenciales para esta sesión:              ║  │
-│   ║  Administrador: admin / 1_Ch0col4t3__3t4Arf1shmi║  │
+│   ║  Administrador: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]║  │
 │   ║                                                    ║  │
 │   ╚════════════════════════════════════════════════════╝  │
 │                                                             │

@@ -90,7 +90,7 @@ pnpm dev
 
 **Login - Administrador**:
 - Usuario: `admin`
-- Contraseña: `1_Ch0col4t3__3t4Arf1shmi`
+- Contraseña: `[ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]`
 
 **Login - Equipo**:
 - Usuario: `prueba`
@@ -187,7 +187,7 @@ Todas las páginas están optimizadas para:
 ### Administrador
 ```
 Usuario: admin
-Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: Administrador
 ```
 

@@ -90,7 +90,7 @@ pnpm dev
 - [ ] Click "Administrador"
 - [ ] Aparece form con "Usuario" y "Contraseña"
 - [ ] Ingreso: `admin`
-- [ ] Ingreso: `1_Ch0col4t3__3t4Arf1shmi`
+- [ ] Ingreso: `[ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]`
 - [ ] Click "Entrar al Rally"
 - [ ] Redirige a dashboard
 - [ ] Veo datos de admin (12 equipos, etc.)
@@ -233,7 +233,7 @@ pnpm dev
 - [ ] No hay XSS vulnerabilities
 
 ### Credenciales de Prueba
-- [ ] Admin: `admin` / `1_Ch0col4t3__3t4Arf1shmi` ✓
+- [ ] Admin: `admin` / `[ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]` ✓
 - [ ] Equipo: `prueba` / `1234567` ✓
 - [ ] Ambas son válidas
 - [ ] Se muestran en form de login

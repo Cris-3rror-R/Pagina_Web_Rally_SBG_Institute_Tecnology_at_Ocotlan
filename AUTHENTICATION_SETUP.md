@@ -10,7 +10,7 @@
 
 ```
 Email/Usuario: admin
-Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: ADMIN
 Descripción: Acceso completo a panel administrativo
 
@@ -55,7 +55,7 @@ Permisos:
 2. **Rellenar formulario**
    ```
    Email: admin
-   Password: 1_Ch0col4t3__3t4Arf1shmi
+   Password: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
    Click: Create user
    ```
 
@@ -119,7 +119,7 @@ ON CONFLICT (user_id) DO NOTHING;
 
 ```
 1. Usuario ingresa credenciales
-   └─ admin / 1_Ch0col4t3__3t4Arf1shmi
+   └─ admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 
 2. Supabase verifica
    └─ ✓ Credenciales correctas
@@ -319,7 +319,7 @@ export default function LoginPage() {
             Credenciales de Prueba:
           </p>
           <p className="text-xs text-aws-navy/70 mb-1">
-            Admin: admin / 1_Ch0col4t3__3t4Arf1shmi
+            Admin: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
           </p>
           <p className="text-xs text-aws-navy/70">
             Equipo: prueba / 1234567
@@ -485,7 +485,7 @@ pnpm dev
 
 # 3. Probar con credenciales
 Usuario: admin
-Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 
 # 4. Verificar redirección a /admin
 

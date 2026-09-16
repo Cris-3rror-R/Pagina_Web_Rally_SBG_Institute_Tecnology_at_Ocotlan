@@ -24,7 +24,7 @@ Tu plataforma **AWS CHALLENGE: Rally de Conocimiento** está **100% completa** y
 - **Página de Selección**: Dos opciones grandes (Admin / Equipo)
 - **Colores Diferenciados**: Naranja para Admin, Azul para Equipo
 - **Credenciales**:
-  - Admin: `admin` / `1_Ch0col4t3__3t4Arf1shmi`
+  - Admin: `admin` / `[ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]`
   - Equipo: `prueba` / `1234567`
 
 ### 4. ✅ Dashboards Específicos por Rol

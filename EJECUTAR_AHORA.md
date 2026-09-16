@@ -52,7 +52,7 @@ Dos opciones grandes:
 #### Si escoligiste ADMINISTRADOR:
 ```
 Usuario: admin
-Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 ```
 
 #### Si escoligiste EQUIPO:
@@ -96,7 +96,7 @@ URL: http://localhost:3000/dashboard?user=admin&type=admin
 1. Abre http://localhost:3000
 2. Click "Iniciar Sesión"
 3. Click "Administrador"
-4. Usuario: `admin` | Contraseña: `1_Ch0col4t3__3t4Arf1shmi`
+4. Usuario: `admin` | Contraseña: `[ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]`
 5. ✅ Ves panel de admin con 12 equipos, 5 estaciones
 
 ### Escenario 2: Equipo ve su progreso

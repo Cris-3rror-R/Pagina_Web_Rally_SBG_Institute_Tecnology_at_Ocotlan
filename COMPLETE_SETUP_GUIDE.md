@@ -55,7 +55,7 @@ Mobile-first approach
 ### Admin
 ```
 Usuario: admin
-Contraseña: 1_Ch0col4t3__3t4Arf1shmi
+Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: ADMIN
 Acceso: Panel administrativo completo
 ```
@@ -155,7 +155,7 @@ for qr_hash in hashes:
 
 ```
 1. Supabase Dashboard → Authentication → Users
-2. Crear usuario: admin / 1_Ch0col4t3__3t4Arf1shmi
+2. Crear usuario: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 3. Crear usuario: prueba / 1234567
 4. Ejecutar SQL de perfiles (ver AUTHENTICATION_SETUP.md)
 ```
@@ -201,7 +201,7 @@ python -m uvicorn main:app --reload
 ```
 1. Ir a http://localhost:3000
 2. Click "Login"
-3. Ingresar: admin / 1_Ch0col4t3__3t4Arf1shmi
+3. Ingresar: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 4. Ver dashboard admin
 5. Logout
 6. Ingresar: prueba / 1234567
