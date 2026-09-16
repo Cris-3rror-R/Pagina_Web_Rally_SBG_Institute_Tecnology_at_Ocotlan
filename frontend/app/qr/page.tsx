@@ -146,13 +146,15 @@ export default function QRScanPage() {
   }, [state, jsQR, lastScanned])
 
   const handleQRDetected = useCallback(async (qrData: string) => {
-    if (!teamId || state !== 'scanning') return
+    // La entrada manual se procesa desde el estado idle; el lector de cámara
+    // solo puede enviar un código mientras está escaneando.
+    if (!teamId || (state !== 'scanning' && state !== 'idle')) return
 
     setLastScanned(qrData)
     stopCamera()
     setState('success')
 
-    const upper = qrData.toUpperCase()
+    const upper = qrData.trim().toUpperCase()
     const isStart = upper.includes('START') || upper.includes('INICIO')
     const isFinish = upper.includes('FINISH') || upper.includes('FINAL') || upper.includes('FIN')
 
@@ -184,7 +186,11 @@ export default function QRScanPage() {
   const [manualCode, setManualCode] = useState('')
   const handleManual = (e: React.FormEvent) => {
     e.preventDefault()
-    if (manualCode.trim()) handleQRDetected(manualCode.trim())
+    const code = manualCode.trim()
+    if (!code) return
+    setStatusMsg('⏳ Procesando código...')
+    void handleQRDetected(code)
+    setManualCode('')
   }
 
   const toggleTorch = async () => {
@@ -393,18 +399,18 @@ export default function QRScanPage() {
           </div>
         )}
 
-        {/* Fallback: Entrada manual (sin revelar los códigos) */}
+        {/* Fallback: Entrada manual */}
         <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-5">
-          <h2 className="text-sm font-bold mb-1 text-[var(--text-primary)]">¿No funciona la cámara?</h2>
+          <h2 className="text-sm font-bold mb-1 text-[var(--text-primary)]">Registrar código manualmente</h2>
           <p className="text-xs text-[var(--text-secondary)] mb-3">
-            Solicita el código al administrador e ingrésalo manualmente.
+            Escribe el código de Inicio o Fin y pulsa Registrar.
           </p>
           <form onSubmit={handleManual} className="flex gap-2">
             <input
               type="text"
               value={manualCode}
               onChange={e => setManualCode(e.target.value)}
-              placeholder="Ingresa el código aquí..."
+              placeholder="InicioAWS_Quest2026_7A3nM_1 o FinAWS_Quest2026_7shnM_1"
               className="flex-1 px-3 py-2 text-xs rounded-xl bg-[var(--sbg-dark)] border border-[var(--sbg-dark-3)] text-[var(--text-primary)] focus:border-[var(--sbg-purple)] focus:outline-none"
             />
             <button
@@ -412,7 +418,7 @@ export default function QRScanPage() {
               disabled={!manualCode.trim()}
               className="px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white disabled:opacity-50"
             >
-              OK
+              Registrar
             </button>
           </form>
         </div>

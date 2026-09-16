@@ -270,6 +270,7 @@ export default function AdminPage() {
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
                 {teamsData.map(({ equipo, progress }) => {
                   const stationsCompleted = progress.filter(p => p.completado).length
+                  const status = equipo.tiempo_final ? 'Finalizado' : equipo.tiempo_inicio ? 'Participando' : 'Sin iniciar'
                   return (
                     <div key={equipo.equipo_id} className="aws-card p-6 flex flex-col min-h-[220px] hover:border-[#7c3aed] transition-colors group">
                       <div className="flex items-start justify-between mb-5">
@@ -279,6 +280,13 @@ export default function AdminPage() {
                         </div>
                         <span className="text-xs text-[#8b949e] font-mono">{equipo.equipo_id.split('-')[0]}</span>
                       </div>
+                      <span className={`self-start text-xs font-bold px-3 py-1 rounded-full ${
+                        equipo.tiempo_final
+                          ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)]'
+                          : equipo.tiempo_inicio
+                          ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)]'
+                          : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
+                      }`}>{status}</span>
                       
                       <div className="flex items-center justify-between mt-auto pt-4">
                         <div>

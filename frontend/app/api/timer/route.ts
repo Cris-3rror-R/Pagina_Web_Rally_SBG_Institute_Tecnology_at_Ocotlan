@@ -6,14 +6,14 @@ export const dynamic = 'force-dynamic'
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { equipo_id, action, timestamp } = body
+    const { equipo_id, action } = body
 
     if (!equipo_id || !action || !['start', 'finish'].includes(action)) {
       return NextResponse.json({ error: 'Faltan parámetros' }, { status: 400 })
     }
 
     const adminSupabase = createAdminClient()
-    const timeValue = timestamp || new Date().toISOString()
+    const timeValue = new Date().toISOString()
     const { data: current, error: currentError } = await adminSupabase
       .from('equipos')
       .select('equipo_id, tiempo_inicio, tiempo_final')

@@ -56,7 +56,20 @@ export async function GET() {
         estado = 'finalizado'
       } else if (team.tiempo_inicio) {
         estado = 'en_progreso'
-        tiempoFormateado = 'En carrera'
+        const start = new Date(team.tiempo_inicio).getTime()
+        if (!Number.isNaN(start)) {
+          duracionSegundos = Math.max(0, Math.floor((Date.now() - start) / 1000))
+          const hrs = Math.floor(duracionSegundos / 3600)
+          const mins = Math.floor((duracionSegundos % 3600) / 60)
+          const secs = duracionSegundos % 60
+          tiempoFormateado = [
+            hrs > 0 ? String(hrs).padStart(2, '0') : null,
+            String(mins).padStart(2, '0'),
+            String(secs).padStart(2, '0'),
+          ].filter(Boolean).join(':')
+        } else {
+          tiempoFormateado = 'En carrera'
+        }
       }
 
       return {
