@@ -100,7 +100,7 @@ pnpm dev
 - [ ] Click "Equipo"
 - [ ] Aparece form con campos
 - [ ] Ingreso: `prueba`
-- [ ] Ingreso: `1234567`
+- [ ] Ingreso: `[TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]`
 - [ ] Click "Entrar al Rally"
 - [ ] Redirige a dashboard
 - [ ] Veo datos de equipo (2,450 puntos, etc.)
@@ -234,7 +234,7 @@ pnpm dev
 
 ### Credenciales de Prueba
 - [ ] Admin: `admin` / `[ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]` ✓
-- [ ] Equipo: `prueba` / `1234567` ✓
+- [ ] Equipo: `prueba` / `[TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]` ✓
 - [ ] Ambas son válidas
 - [ ] Se muestran en form de login
 

@@ -46,7 +46,7 @@ PNPM_SECURITY.md
 AUTHENTICATION_SETUP.md
 ├─ Credenciales de prueba
 │  ├─ Admin: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
-│  └─ Equipo: prueba / 1234567
+│  └─ Equipo: prueba / [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 ├─ Crear usuarios en Supabase
 ├─ JWT tokens
 ├─ RLS policies
@@ -217,7 +217,7 @@ Admin:
 
 Equipo:
 ├─ Usuario: prueba
-├─ Contraseña: 1234567
+├─ Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 └─ Rol: EQUIPO
 
 Colores AWS SBG:

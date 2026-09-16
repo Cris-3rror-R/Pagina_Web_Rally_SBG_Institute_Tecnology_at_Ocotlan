@@ -26,7 +26,7 @@ Acceso: Panel de control completo
 ### Usuario Regular (Equipo)
 ```
 Usuario: prueba
-Contraseña: 1234567
+Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: EQUIPO
 Acceso: Escaneo QR, GPS, clasificación
 ```

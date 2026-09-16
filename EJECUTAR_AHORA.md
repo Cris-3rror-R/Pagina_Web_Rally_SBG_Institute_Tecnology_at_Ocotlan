@@ -58,7 +58,7 @@ Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 #### Si escoligiste EQUIPO:
 ```
 Usuario: prueba
-Contraseña: 1234567
+Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 ```
 
 **Click en "Entrar al Rally"** ↓
@@ -103,7 +103,7 @@ URL: http://localhost:3000/dashboard?user=admin&type=admin
 1. Abre http://localhost:3000
 2. Click "Iniciar Sesión"
 3. Click "Equipo"
-4. Usuario: `prueba` | Contraseña: `1234567`
+4. Usuario: `prueba` | Contraseña: `[TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]`
 5. ✅ Ves tu dashboard con 2,450 puntos, posición #3
 
 ### Escenario 3: Logout

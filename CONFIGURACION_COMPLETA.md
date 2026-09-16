@@ -94,7 +94,7 @@ pnpm dev
 
 **Login - Equipo**:
 - Usuario: `prueba`
-- Contraseña: `1234567`
+- Contraseña: `[TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]`
 
 **Dashboard**: http://localhost:3000/dashboard?user=admin&type=admin
 - ✅ Muestra datos de ejemplo
@@ -194,7 +194,7 @@ Rol: Administrador
 ### Equipo
 ```
 Usuario: prueba
-Contraseña: 1234567
+Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: Equipo
 ```
 

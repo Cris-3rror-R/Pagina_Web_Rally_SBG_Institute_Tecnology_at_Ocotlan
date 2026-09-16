@@ -25,8 +25,8 @@
 │   ║      [Iniciar Sesión] →                         ║   │
 │   ║                                                   ║   │
 │   ║  🔐 Credenciales de Prueba                      ║   │
-│   ║  │ Administrador: admin / 1_Ch0col4t3...       ║   │
-│   ║  │ Equipo: prueba / 1234567                    ║   │
+│   ║  │ Administrador: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]       ║   │
+│   ║  │ Equipo: prueba / [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]                    ║   │
 │   ║                                                   ║   │
 │   ╚═══════════════════════════════════════════════════╝   │
 │                                                             │
@@ -262,7 +262,7 @@ Mobile (320px - 767px)       Tablet (768px - 1023px)    Desktop (1024px+)
 3. LOGIN ADMIN          LOGIN EQUIPO
    ┌─────────────────┐  ┌──────────────┐
    │ admin           │  │ prueba       │
-   │ 1_Ch0col4t3...  │  │ 1234567      │
+   │ [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]  │  │ [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]      │
    └────────┬────────┘  └──────┬───────┘
             │                  │
             └────────┬─────────┘

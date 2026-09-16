@@ -217,7 +217,7 @@ Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 **Equipo**:
 ```
 Usuario: prueba
-Contraseña: 1234567
+Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 ```
 
 ### 4. Verificar Supabase

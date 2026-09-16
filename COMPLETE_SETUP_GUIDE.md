@@ -63,7 +63,7 @@ Acceso: Panel administrativo completo
 ### Equipo Regular
 ```
 Usuario: prueba
-Contraseña: 1234567
+Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: EQUIPO
 Acceso: Escaneo QR, GPS, clasificación
 ```
@@ -156,7 +156,7 @@ for qr_hash in hashes:
 ```
 1. Supabase Dashboard → Authentication → Users
 2. Crear usuario: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
-3. Crear usuario: prueba / 1234567
+3. Crear usuario: prueba / [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 4. Ejecutar SQL de perfiles (ver AUTHENTICATION_SETUP.md)
 ```
 
@@ -204,7 +204,7 @@ python -m uvicorn main:app --reload
 3. Ingresar: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 4. Ver dashboard admin
 5. Logout
-6. Ingresar: prueba / 1234567
+6. Ingresar: prueba / [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 7. Ver dashboard equipo
 8. ✅ Listo!
 ```

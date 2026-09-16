@@ -57,7 +57,7 @@ app/
 
 3. Ingresa credenciales
    ├─ admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
-   └─ prueba / 1234567
+   └─ prueba / [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 
 4. Supabase autentica
    └─ Genera JWT token
@@ -259,7 +259,7 @@ Public Key:    sb_publishable_z-f5b22fliZ_aRfR1JTJNQ_BCy68Ybu
 Service Role:  [Guardada en SUPABASE_CREDENTIALS.md]
 
 Admin:         admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
-Equipo:        prueba / 1234567
+Equipo:        prueba / [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 ```
 
 ---

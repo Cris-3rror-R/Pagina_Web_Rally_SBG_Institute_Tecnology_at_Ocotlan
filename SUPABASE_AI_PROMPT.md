@@ -224,9 +224,9 @@ BEGIN
     -- 2. Crear los usuarios de prueba
     INSERT INTO auth.users (id, email, encrypted_password, email_confirmed_at, raw_user_meta_data)
     VALUES 
-        (admin1_id, 'admin@rally.com', '$2a$10$UnusedPasswordHashForTest1234567890123', NOW(), '{"role":"ADMIN", "nombre":"Administrador Principal", "password":"AdminPassword123"}'),
-        (team1_id, 'equipo1@rally.com', '$2a$10$UnusedPasswordHashForTest1234567890123', NOW(), '{"role":"EQUIPO", "nombre":"Los Rayos del Rally"}'),
-        (team2_id, 'equipo2@rally.com', '$2a$10$UnusedPasswordHashForTest1234567890123', NOW(), '{"role":"EQUIPO", "nombre":"Escudería Fuego"}');
+        (admin1_id, 'admin@rally.com', '$2a$10$UnusedPasswordHashForTest[TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]890123', NOW(), '{"role":"ADMIN", "nombre":"Administrador Principal", "password":"AdminPassword123"}'),
+        (team1_id, 'equipo1@rally.com', '$2a$10$UnusedPasswordHashForTest[TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]890123', NOW(), '{"role":"EQUIPO", "nombre":"Los Rayos del Rally"}'),
+        (team2_id, 'equipo2@rally.com', '$2a$10$UnusedPasswordHashForTest[TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]890123', NOW(), '{"role":"EQUIPO", "nombre":"Escudería Fuego"}');
 
     -- 3. Estaciones de prueba (Estaciones 1 a 4)
     INSERT INTO public.stations (nombre, encargados, descripcion, ubicacion_palabra, puntos_totales)

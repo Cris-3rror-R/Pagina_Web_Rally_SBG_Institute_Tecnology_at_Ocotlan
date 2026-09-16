@@ -27,7 +27,7 @@ Permisos:
 
 ```
 Email/Usuario: prueba
-Contraseña: 1234567
+Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 Rol: EQUIPO
 Descripción: Acceso básico para equipos
 
@@ -322,7 +322,7 @@ export default function LoginPage() {
             Admin: admin / [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
           </p>
           <p className="text-xs text-aws-navy/70">
-            Equipo: prueba / 1234567
+            Equipo: prueba / [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
           </p>
         </div>
       </div>
@@ -491,7 +491,7 @@ Contraseña: [ADMIN_PASSWORD_CONFIGURED_IN_SUPABASE]
 
 # 5. Probar con equipo
 Usuario: prueba
-Contraseña: 1234567
+Contraseña: [TEAM_PASSWORD_CONFIGURED_IN_SUPABASE]
 
 # 6. Verificar redirección a /dashboard
 
