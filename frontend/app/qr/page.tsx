@@ -401,26 +401,30 @@ export default function QRScanPage() {
 
         {/* Fallback: Entrada manual */}
         <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-5">
-          <h2 className="text-sm font-bold mb-1 text-[var(--text-primary)]">Registrar código manualmente</h2>
+          <h2 className="text-base sm:text-lg font-bold mb-1 text-[var(--text-primary)]">Registrar código manualmente</h2>
           <p className="text-xs text-[var(--text-secondary)] mb-3">
-            Escribe el código de Inicio o Fin y pulsa Registrar.
+            Escribe la palabra configurada por el administrador y pulsa Registrar.
           </p>
-          <form onSubmit={handleManual} className="flex gap-2">
+          <form onSubmit={handleManual} className="flex flex-col sm:flex-row gap-3">
             <input
               type="text"
               value={manualCode}
               onChange={e => setManualCode(e.target.value)}
-              placeholder="InicioAWS_Quest2026_7A3nM_1 o FinAWS_Quest2026_7shnM_1"
-              className="flex-1 px-3 py-2 text-xs rounded-xl bg-[var(--sbg-dark)] border border-[var(--sbg-dark-3)] text-[var(--text-primary)] focus:border-[var(--sbg-purple)] focus:outline-none"
+              placeholder="Escribe la palabra clave"
+              aria-label="Palabra clave de inicio o finalización"
+              className="flex-1 min-h-12 px-4 py-3 text-sm rounded-xl bg-[var(--sbg-dark)] border border-[var(--sbg-dark-3)] text-[var(--text-primary)] focus:border-[var(--sbg-purple)] focus:outline-none"
             />
             <button
               type="submit"
               disabled={!manualCode.trim()}
-              className="px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white disabled:opacity-50"
+              className="min-h-12 px-6 py-3 text-sm font-bold rounded-xl bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white disabled:opacity-50"
             >
               Registrar
             </button>
           </form>
+          {statusMsg && state !== 'success' && state !== 'error' && (
+            <p className="mt-3 text-sm text-center text-[var(--sbg-blue)]">{statusMsg}</p>
+          )}
         </div>
       </div>
     </main>

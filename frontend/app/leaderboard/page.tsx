@@ -9,10 +9,11 @@ export default function LeaderboardPage() {
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [lastUpdated, setLastUpdated] = useState<string>('')
+  const [adminName, setAdminName] = useState<string | null>(null)
 
   const fetchLeaderboard = async () => {
     try {
-      const res = await fetch('/api/leaderboard')
+      const res = await fetch(`/api/leaderboard?t=${Date.now()}`, { cache: 'no-store' })
       if (res.ok) {
         const data = await res.json()
         setEntries(data.entries || [])
@@ -28,6 +29,9 @@ export default function LeaderboardPage() {
   }
 
   useEffect(() => {
+    setAdminName(localStorage.getItem('rally_is_admin') === 'true'
+      ? localStorage.getItem('rally_admin_name') || 'Administrador'
+      : null)
     fetchLeaderboard()
     // Refrescar cada 5 segundos
     const interval = setInterval(fetchLeaderboard, 5000)
@@ -66,6 +70,11 @@ export default function LeaderboardPage() {
             >
               ← Inicio
             </Link>
+            {adminName && (
+              <Link href="/admin" className="text-sm font-bold text-white hover:text-[var(--sbg-blue)]">
+                Panel Admin · {adminName}
+              </Link>
+            )}
           </div>
         </div>
       </header>

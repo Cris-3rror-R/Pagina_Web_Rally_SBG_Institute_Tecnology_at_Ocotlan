@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/utils/supabase/admin'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function GET(
   _request: Request,
@@ -61,7 +62,10 @@ export async function GET(
       puntos_ganados: progresoMap[st.estacion_id]?.puntos_ganados ?? 0
     }))
 
-    return NextResponse.json({ equipo: equipo || null, stationsProgress })
+    return NextResponse.json(
+      { equipo: equipo || null, stationsProgress },
+      { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' } }
+    )
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : 'Error al obtener progreso' },

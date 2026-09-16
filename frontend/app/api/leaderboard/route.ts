@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { createAdminClient } from '@/utils/supabase/admin'
 
 export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function GET() {
   try {
@@ -95,7 +96,10 @@ export async function GET() {
       return a.nombre.localeCompare(b.nombre)
     })
 
-    return NextResponse.json({ entries })
+    return NextResponse.json(
+      { entries, generatedAt: new Date().toISOString() },
+      { headers: { 'Cache-Control': 'no-store, no-cache, must-revalidate' } }
+    )
   } catch (err) {
     console.error('Error en /api/leaderboard:', err)
     return NextResponse.json(

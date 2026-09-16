@@ -25,10 +25,11 @@ export default function AdminPage() {
   const [gradeError, setGradeError] = useState<string | null>(null)
   const [stationScores, setStationScores] = useState<{ [key: number]: number }>({})
   const [stationCompleted, setStationCompleted] = useState<{ [key: number]: boolean }>({})
+  const [adminName, setAdminName] = useState('Administrador')
 
   const fetchTeams = async () => {
     try {
-      const res = await fetch('/api/teams')
+      const res = await fetch(`/api/teams?t=${Date.now()}`, { cache: 'no-store' })
       if (res.ok) {
         const data = await res.json()
         const teams: Equipo[] = data.teams
@@ -61,6 +62,7 @@ export default function AdminPage() {
       router.push('/')
       return
     }
+    setAdminName(localStorage.getItem('rally_admin_name') || 'Administrador')
     fetchTeams()
     const interval = setInterval(fetchTeams, 5000)
     return () => clearInterval(interval)
@@ -149,7 +151,8 @@ export default function AdminPage() {
             <div className="w-10 h-10 flex items-center justify-center font-bold text-sm rounded bg-gradient-to-br from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white">
               AWS
             </div>
-            <span className="font-bold text-base hidden sm:inline text-[var(--text-primary)]">Panel Admin</span>
+            <span className="font-bold text-base hidden sm:inline text-white">Panel Admin</span>
+            <span className="hidden sm:inline text-base font-bold text-white">· {adminName}</span>
           </Link>
 
           <div className="flex items-center gap-3">

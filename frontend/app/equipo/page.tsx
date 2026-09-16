@@ -6,8 +6,6 @@ import Link from 'next/link'
 import { formatDuration } from '@/utils/rally-service'
 import { Equipo, TeamStationProgress } from '@/types/rally'
 
-const POLL_INTERVAL_MS = 5000 // Actualiza cada 5 segundos
-
 function EquipoContent() {
   const [team, setTeam] = useState<Equipo | null>(null)
   const [progress, setProgress] = useState<TeamStationProgress[]>([])
@@ -21,7 +19,10 @@ function EquipoContent() {
   // Función centralizada que carga TODO desde el admin API (sin RLS)
   const fetchTeamData = useCallback(async (id: string, isInitial = false) => {
     try {
-      const res = await fetch(`/api/team-progress/${id}`, { cache: 'no-store' })
+      const res = await fetch(`/api/team-progress/${id}?t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache' }
+      })
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}))
         throw new Error(errData.error || `HTTP ${res.status}`)
@@ -89,7 +90,7 @@ function EquipoContent() {
 
     const interval = setInterval(() => {
       fetchTeamData(id, false)
-    }, POLL_INTERVAL_MS)
+    }, 1000)
 
     return () => clearInterval(interval)
   }, [teamId, loading, fetchTeamData])
