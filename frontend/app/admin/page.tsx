@@ -229,16 +229,22 @@ export default function AdminPage() {
                   <p className="text-sm font-bold text-[var(--sbg-green)] mb-2">▶ INICIO DE RALLY</p>
                   <div className="bg-white p-2 inline-block rounded-xl">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=AWS_RALLY_START_2026`} alt="QR Inicio" className="w-32 h-32" />
+                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=InicioAWS_Quest2026_7A3nM_1`} alt="QR Inicio" className="w-32 h-32" />
                   </div>
+                  <p className="mt-3 text-xs text-[var(--text-secondary)]">Inicio:</p>
+                  <code className="block mt-1 break-all text-xs font-semibold text-[var(--sbg-green)]">InicioAWS_Quest2026_7A3nM_1</code>
+                  <p className="mt-2 text-[11px] text-[var(--text-secondary)]">Si el QR no funciona, usa esta palabra clave en el escáner.</p>
                 </div>
                 
                 <div className="border-t border-[var(--sbg-dark-3)] pt-4 text-center">
                   <p className="text-sm font-bold text-[var(--sbg-orange)] mb-2">⏹ FIN DE RALLY</p>
                   <div className="bg-white p-2 inline-block rounded-xl">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=AWS_RALLY_FINISH_2026`} alt="QR Fin" className="w-32 h-32" />
+                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FinAWS_Quest2026_7shnM_1`} alt="QR Fin" className="w-32 h-32" />
                   </div>
+                  <p className="mt-3 text-xs text-[var(--text-secondary)]">Fin:</p>
+                  <code className="block mt-1 break-all text-xs font-semibold text-[var(--sbg-orange)]">FinAWS_Quest2026_7shnM_1</code>
+                  <p className="mt-2 text-[11px] text-[var(--text-secondary)]">Al registrar esta palabra clave, el contador se detiene.</p>
                 </div>
               </div>
             </div>

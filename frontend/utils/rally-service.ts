@@ -1,8 +1,8 @@
 import { createClient } from './supabase/client'
 import { Equipo, Station, EquipoEstacion, TeamStationProgress, LeaderboardEntry } from '../types/rally'
 
-export const START_QR_CODE = 'AWS_RALLY_START_2026'
-export const FINISH_QR_CODE = 'AWS_RALLY_FINISH_2026'
+export const START_QR_CODE = 'InicioAWS_Quest2026_7A3nM_1'
+export const FINISH_QR_CODE = 'FinAWS_Quest2026_7shnM_1'
 
 /**
  * 1. CREAR EQUIPO
@@ -152,7 +152,7 @@ export async function startTeamTimer(
   qrCode: string
 ): Promise<{ success: boolean; error?: string; timestamp?: string }> {
   const trimmed = qrCode.trim().toUpperCase()
-  const validCodes = [START_QR_CODE, 'RALLY_START', 'START', 'INICIO']
+  const validCodes = [START_QR_CODE.toUpperCase(), 'RALLY_START', 'START', 'INICIO']
 
   if (!validCodes.some(c => trimmed.includes(c))) {
     return { success: false, error: 'Código QR de inicio no válido. Asegúrate de escanear el QR oficial de arranque del Rally.' }
@@ -161,17 +161,18 @@ export async function startTeamTimer(
   const nowIso = new Date().toISOString()
 
   try {
-    const supabase = createClient()
-    const { error } = await supabase
-      .from('equipos')
-      .update({ tiempo_inicio: nowIso })
-      .eq('equipo_id', equipoId)
-
-    if (error) {
-      console.warn('Error actualizando tiempo_inicio en BD:', error.message)
+    const response = await fetch('/api/timer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ equipo_id: equipoId, action: 'start', timestamp: nowIso })
+    })
+    const data = await response.json()
+    if (!response.ok) {
+      return { success: false, error: data.error || 'El cronómetro ya fue iniciado para este equipo.' }
     }
   } catch (err) {
-    console.warn('Error en supabase start timer:', err)
+    console.error('Error en API de inicio del cronómetro:', err)
+    return { success: false, error: 'No se pudo iniciar el cronómetro. Comprueba la conexión.' }
   }
 
   // Actualizar sesión local
@@ -199,7 +200,7 @@ export async function stopTeamTimer(
   qrCode: string
 ): Promise<{ success: boolean; error?: string; timestamp?: string }> {
   const trimmed = qrCode.trim().toUpperCase()
-  const validCodes = [FINISH_QR_CODE, 'RALLY_FINISH', 'FINISH', 'FINAL', 'FIN']
+  const validCodes = [FINISH_QR_CODE.toUpperCase(), 'RALLY_FINISH', 'FINISH', 'FINAL', 'FIN']
 
   if (!validCodes.some(c => trimmed.includes(c))) {
     return { success: false, error: 'Código QR de finalización no válido. Asegúrate de escanear el QR oficial de cierre del Rally.' }
@@ -208,17 +209,18 @@ export async function stopTeamTimer(
   const nowIso = new Date().toISOString()
 
   try {
-    const supabase = createClient()
-    const { error } = await supabase
-      .from('equipos')
-      .update({ tiempo_final: nowIso })
-      .eq('equipo_id', equipoId)
-
-    if (error) {
-      console.warn('Error actualizando tiempo_final en BD:', error.message)
+    const response = await fetch('/api/timer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ equipo_id: equipoId, action: 'finish', timestamp: nowIso })
+    })
+    const data = await response.json()
+    if (!response.ok) {
+      return { success: false, error: data.error || 'El cronómetro ya fue detenido para este equipo.' }
     }
   } catch (err) {
-    console.warn('Error en supabase stop timer:', err)
+    console.error('Error en API de finalización del cronómetro:', err)
+    return { success: false, error: 'No se pudo detener el cronómetro. Comprueba la conexión.' }
   }
 
   // Actualizar sesión local

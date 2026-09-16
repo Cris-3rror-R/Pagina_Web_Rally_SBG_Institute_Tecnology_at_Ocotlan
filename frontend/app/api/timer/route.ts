@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { equipo_id, action, timestamp } = body
 
-    if (!equipo_id || !action) {
+    if (!equipo_id || !action || !['start', 'finish'].includes(action)) {
       return NextResponse.json({ error: 'Faltan parámetros' }, { status: 400 })
     }
 
@@ -22,15 +22,32 @@ export async function POST(request: Request) {
       updatePayload.tiempo_final = timeValue
     }
 
-    const { data: updated, error } = await adminSupabase
+    let updateQuery = adminSupabase
       .from('equipos')
       .update(updatePayload)
       .eq('equipo_id', equipo_id)
+
+    if (action === 'start') {
+      updateQuery = updateQuery.is('tiempo_inicio', null).is('tiempo_final', null)
+    } else {
+      updateQuery = updateQuery.is('tiempo_final', null).not('tiempo_inicio', 'is', null)
+    }
+
+    const { data: updated, error } = await updateQuery
       .select()
-      .single()
+      .maybeSingle()
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    if (!updated) {
+      return NextResponse.json(
+        { error: action === 'start'
+          ? 'Este equipo ya inició el cronómetro.'
+          : 'Este equipo ya detuvo el cronómetro.' },
+        { status: 409 }
+      )
     }
 
     return NextResponse.json({ success: true, equipo: updated, timestamp: timeValue })
