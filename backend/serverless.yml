@@ -1,0 +1,50 @@
+service: rally-competition-api
+
+provider:
+  name: aws
+  runtime: python3.11
+  region: us-east-1
+  stage: ${opt:stage, 'dev'}
+  environment:
+    SUPABASE_URL: ${env:SUPABASE_URL}
+    SUPABASE_KEY: ${env:SUPABASE_KEY}
+    JWT_SECRET: ${env:JWT_SECRET}
+    ENV: ${self:provider.stage}
+  cors: true
+  apiGateway:
+    metrics: true
+    logging: true
+
+functions:
+  api:
+    handler: main.app
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /
+          method: ANY
+          cors: true
+    timeout: 30
+    memorySize: 512
+
+plugins:
+  - serverless-python-requirements
+  - serverless-plugin-tracing
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    slim: true
+    strip: false
+    layer: true
+    useStaticCache: true
+    useDownloadCache: true
+
+package:
+  patterns:
+    - '!node_modules/**'
+    - '!venv/**'
+    - '!.pytest_cache/**'

@@ -1,0 +1,159 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main
+      - production
+  pull_request:
+    branches:
+      - main
+      - production
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    name: Lint & Test
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Frontend
+      - name: Frontend - Install dependencies
+        working-directory: ./frontend
+        run: pnpm install
+
+      - name: Frontend - Lint
+        working-directory: ./frontend
+        run: pnpm lint
+
+      - name: Frontend - Type check
+        working-directory: ./frontend
+        run: pnpm type-check
+
+      - name: Frontend - Build
+        working-directory: ./frontend
+        run: pnpm build
+
+      # Backend
+      - name: Backend - Install dependencies
+        working-directory: ./backend
+        run: pip install -r requirements-simple.txt
+
+      - name: Backend - Lint
+        working-directory: ./backend
+        run: |
+          pip install flake8
+          flake8 . --max-line-length=100 --extend-ignore=E501
+
+      - name: Backend - Type check
+        working-directory: ./backend
+        run: |
+          pip install mypy
+          mypy main.py --ignore-missing-imports
+
+      - name: Backend - Tests
+        working-directory: ./backend
+        run: |
+          pip install pytest pytest-asyncio
+          pytest tests/ -v
+
+  deploy:
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    name: Deploy to AWS
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Deploy Frontend to Amplify
+      - name: Frontend - Install dependencies
+        working-directory: ./frontend
+        run: pnpm install
+
+      - name: Frontend - Build
+        working-directory: ./frontend
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+
+      - name: Frontend - Deploy to Amplify
+        run: |
+          npm install -g @aws-amplify/cli
+          amplify deploy --yes --only hosting
+        env:
+          AMPLIFY_APP_ID: ${{ secrets.AMPLIFY_APP_ID }}
+          AMPLIFY_ENVIRONMENT_NAME: ${{ github.ref == 'refs/heads/main' && 'dev' || 'prod' }}
+
+      # Deploy Backend to Lambda
+      - name: Backend - Install Serverless
+        run: pnpm install -g serverless
+
+      - name: Backend - Install dependencies
+        working-directory: ./backend
+        run: |
+          pnpm install
+          pip install -r requirements-simple.txt
+
+      - name: Backend - Deploy Lambda
+        working-directory: ./backend
+        run: |
+          serverless deploy \
+            --stage ${{ github.ref == 'refs/heads/main' && 'dev' || 'prod' }} \
+            --aws-profile default
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+
+      - name: Deployment successful
+        run: |
+          echo "✅ Deployment completed successfully!"
+          echo "Frontend: ${{ secrets.AMPLIFY_URL }}"
+          echo "API: ${{ secrets.API_GATEWAY_URL }}"
+
+      # Notify Slack (optional)
+      - name: Notify Slack
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: 'Deployment ${{ job.status }}: ${{ github.ref }}'
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

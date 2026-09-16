@@ -1,0 +1,219 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { LeaderboardEntry } from '@/types/rally'
+
+export default function LeaderboardPage() {
+  const [entries, setEntries] = useState<LeaderboardEntry[]>([])
+  const [loading, setLoading] = useState(true)
+  const [searchQuery, setSearchQuery] = useState('')
+  const [lastUpdated, setLastUpdated] = useState<string>('')
+
+  const fetchLeaderboard = async () => {
+    try {
+      const res = await fetch('/api/leaderboard')
+      if (res.ok) {
+        const data = await res.json()
+        setEntries(data.entries || [])
+        setLastUpdated(new Date().toLocaleTimeString())
+      } else {
+        console.error('Error HTTP del leaderboard:', res.status)
+      }
+    } catch (err) {
+      console.error('Error cargando leaderboard:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchLeaderboard()
+    // Refrescar cada 5 segundos
+    const interval = setInterval(fetchLeaderboard, 5000)
+    return () => clearInterval(interval)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const filteredEntries = entries.filter(e =>
+    e.nombre.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
+  return (
+    <main className="min-h-screen flex flex-col relative overflow-hidden bg-[var(--sbg-dark)] text-[var(--text-primary)]">
+      {/* Background gradients */}
+      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-[var(--sbg-purple)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-[var(--sbg-blue)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
+
+      {/* HEADER */}
+      <header className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 flex items-center justify-center font-bold text-sm rounded bg-gradient-to-br from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white">
+              AWS
+            </div>
+            <span className="font-bold text-base hidden sm:inline text-[var(--text-primary)]">Clasificación Global</span>
+          </Link>
+
+          <div className="flex items-center gap-4">
+            <span className="text-xs font-bold tracking-wide flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--sbg-green)]/10 text-[var(--sbg-green)] border border-[var(--sbg-green)]/30 uppercase">
+              <span className="w-2 h-2 rounded-full bg-[var(--sbg-green)] animate-pulse" />
+              En Vivo
+            </span>
+            <Link
+              href="/"
+              className="text-sm font-bold px-4 py-2 rounded-full border border-[var(--sbg-dark-3)] text-[var(--text-secondary)] hover:bg-[var(--sbg-dark-2)] transition-colors"
+            >
+              ← Inicio
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <div className="flex-1 max-w-7xl mx-auto w-full px-4 py-10 space-y-8 relative z-10">
+        {/* CABECERA */}
+        <section className="space-y-2">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[var(--sbg-blue)] via-[var(--sbg-purple)] to-[var(--sbg-pink)]">
+            Clasificación General
+          </h1>
+          <p className="text-sm text-[var(--text-secondary)]">
+            Equipos ordenados por mayor puntaje. En caso de empate, gana el menor tiempo.
+            {lastUpdated && <span className="ml-2 font-medium text-[var(--sbg-green)]">Actualizado: {lastUpdated}</span>}
+          </p>
+        </section>
+
+        {/* TABLA */}
+        <section className="rounded-2xl overflow-hidden border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)]">
+          {/* BARRA BUSQUEDA */}
+          <div className="p-4 border-b border-[var(--sbg-dark-3)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <h2 className="font-bold text-base">
+              {loading ? 'Cargando...' : `${filteredEntries.length} Equipo${filteredEntries.length !== 1 ? 's' : ''}`}
+            </h2>
+            <div className="flex items-center gap-3">
+              <input
+                type="text"
+                placeholder="Buscar equipo..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                className="text-sm w-full sm:w-64 bg-[var(--sbg-dark)] border-[var(--sbg-dark-3)] focus:border-[var(--sbg-purple)] focus:ring-1 focus:ring-[var(--sbg-purple)]"
+              />
+              <button
+                onClick={fetchLeaderboard}
+                disabled={loading}
+                className="px-4 py-2 text-sm font-bold bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white rounded-lg disabled:opacity-50 flex-shrink-0 transition-transform hover:scale-105"
+              >
+                {loading ? '...' : 'Actualizar'}
+              </button>
+            </div>
+          </div>
+
+          {/* DATOS TABLA */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm whitespace-nowrap">
+              <thead className="bg-[var(--sbg-dark)] text-[var(--text-secondary)] text-xs uppercase tracking-wider">
+                <tr>
+                  <th className="py-3 px-4 font-semibold text-center w-16">Pos</th>
+                  <th className="py-3 px-4 font-semibold">Equipo</th>
+                  <th className="py-3 px-4 font-semibold text-center">Estaciones</th>
+                  <th className="py-3 px-4 font-semibold text-center">Tiempo</th>
+                  <th className="py-3 px-4 font-semibold text-right">Puntaje</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[var(--sbg-dark-3)]">
+                {filteredEntries.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="py-16 text-center text-[var(--text-secondary)] text-sm">
+                      {loading
+                        ? <div className="flex items-center justify-center gap-3"><div className="w-5 h-5 rounded-full border-2 border-[var(--sbg-purple)] border-t-transparent animate-spin" /><span>Cargando equipos...</span></div>
+                        : 'No hay equipos registrados aún.'}
+                    </td>
+                  </tr>
+                ) : (
+                  filteredEntries.map((entry, index) => {
+                    const rank = index + 1
+                    const rankColors = [
+                      'text-[var(--sbg-orange)]',
+                      'text-[var(--text-secondary)]',
+                      'text-[var(--sbg-orange-dark)]',
+                    ]
+
+                    return (
+                      <tr
+                        key={entry.equipo_id}
+                        className={`hover:bg-[var(--sbg-dark-3)] transition-colors ${rank <= 3 ? 'bg-[var(--sbg-dark)]/50' : 'bg-[var(--sbg-dark-2)]'}`}
+                      >
+                        {/* POSICIÓN */}
+                        <td className="py-4 px-4 text-center">
+                          {rank === 1 ? <span className="text-2xl">🥇</span>
+                          : rank === 2 ? <span className="text-2xl">🥈</span>
+                          : rank === 3 ? <span className="text-2xl">🥉</span>
+                          : <span className="text-[var(--text-secondary)] font-mono text-sm font-bold">#{rank}</span>}
+                        </td>
+
+                        {/* EQUIPO */}
+                        <td className="py-4 px-4">
+                          <p className={`font-bold text-base ${rank <= 3 ? 'text-[var(--sbg-blue)]' : 'text-[var(--text-primary)]'}`}>
+                            {entry.nombre}
+                          </p>
+                          <span className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block font-semibold
+                            ${entry.estado === 'finalizado'
+                              ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)] border border-[var(--sbg-green)]/20'
+                              : entry.estado === 'en_progreso'
+                              ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)] border border-[var(--sbg-blue)]/20'
+                              : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'}`}
+                          >
+                            {entry.estado === 'finalizado' ? '✅ Finalizado' : entry.estado === 'en_progreso' ? '⏱️ En Carrera' : '⏳ Esperando'}
+                          </span>
+                        </td>
+
+                        {/* PROGRESO */}
+                        <td className="py-4 px-4 text-center">
+                          <div className="inline-flex flex-col items-center gap-1">
+                            <span className="font-bold text-sm">
+                              {entry.estaciones_completadas}/4
+                            </span>
+                            <div className="flex gap-1">
+                              {[1,2,3,4].map(i => (
+                                <div
+                                  key={i}
+                                  className={`w-2 h-2 rounded-full ${i <= entry.estaciones_completadas ? 'bg-[var(--sbg-green)]' : 'bg-[var(--sbg-dark-3)]'}`}
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        </td>
+
+                        {/* TIEMPO */}
+                        <td className="py-4 px-4 text-center font-mono text-sm text-[var(--text-secondary)]">
+                          {entry.tiempo_formateado}
+                        </td>
+
+                        {/* PUNTAJE */}
+                        <td className="py-4 px-4 text-right">
+                          <span className={`font-extrabold text-xl ${
+                            rank === 1 ? 'text-[var(--sbg-orange)]'
+                            : rank === 2 ? 'text-[var(--text-secondary)]'
+                            : rank === 3 ? 'text-[var(--sbg-orange-dark)]'
+                            : 'text-[var(--text-primary)]'
+                          }`}>
+                            {entry.puntaje_total}
+                          </span>
+                          <span className="text-xs text-[var(--text-secondary)] ml-1">pts</span>
+                        </td>
+                      </tr>
+                    )
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* FOOTER INFO */}
+        <p className="text-center text-xs text-[var(--text-secondary)]">
+          La clasificación se actualiza automáticamente. En caso de empate de puntos, gana el equipo con menor tiempo.
+        </p>
+      </div>
+    </main>
+  )
+}

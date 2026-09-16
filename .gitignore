@@ -1,0 +1,72 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+
+# Next.js
+.next/
+out/
+build/
+
+# Python
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# AWS
+.serverless/
+.chalice/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build
+dist/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+tmp/
+temp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+.coverage
+
+# AWS Amplify
+amplify/\#current-cloud-backend
+amplify/.config/local-*
+amplify/logs/
+
+# Secrets
+secrets.json
+*.key
+*.pem
