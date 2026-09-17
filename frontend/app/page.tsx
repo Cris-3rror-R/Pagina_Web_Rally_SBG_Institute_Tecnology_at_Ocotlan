@@ -98,13 +98,6 @@ export default function HomePage() {
             <img src="/imagenes/AWS_logo.png" alt="AWS" className="visual-logo" />
           </div>
           
-          <Link
-            href="/leaderboard"
-            className="text-sm font-bold px-6 py-2.5 rounded-full bg-gradient-to-r from-[var(--sbg-purple)] to-[var(--sbg-pink)] text-white hover:scale-105 transition-transform shadow-[var(--glow-primary)] flex items-center gap-2"
-          >
-            <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
-            <span>Clasificación Global</span>
-          </Link>
         </div>
       </header>
 
@@ -122,19 +115,26 @@ export default function HomePage() {
           Demuestra tus habilidades resolviendo retos de arquitectura, seguridad y despliegue en la nube. ¡Registra a tu equipo y compite en tiempo real!
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center gap-6 w-full max-w-md mx-auto">
-          <button
-            onClick={() => setShowTeamModal(true)}
-            className="w-full py-4 text-base font-bold text-[var(--sbg-dark)] bg-gradient-to-r from-[var(--sbg-green)] to-[var(--sbg-blue)] rounded-xl hover:scale-105 transition-all shadow-[var(--glow-accent)]"
-          >
-            Crear Equipo
-          </button>
+        <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto">
           <button
             onClick={() => setShowAdminModal(true)}
-            className="w-full py-4 text-base font-bold text-[var(--text-primary)] bg-[var(--sbg-dark-2)] border border-[var(--sbg-dark-3)] rounded-xl hover:bg-[var(--sbg-dark-3)] transition-all"
+            className="w-full py-4 text-base font-bold text-white bg-[var(--sbg-purple)] rounded-xl hover:bg-[var(--sbg-pink)] transition-all"
           >
             Administrador
           </button>
+          <button
+            onClick={() => setShowTeamModal(true)}
+            className="w-full py-4 text-base font-bold text-[var(--sbg-dark)] bg-[var(--sbg-green)] rounded-xl hover:bg-[var(--sbg-blue)] transition-all"
+          >
+            Crear Equipo
+          </button>
+          <Link
+            href="/leaderboard"
+            className="w-full py-4 text-base font-bold text-[var(--sbg-dark)] bg-[var(--sbg-blue)] rounded-xl hover:bg-[var(--sbg-green)] transition-all flex items-center justify-center gap-2"
+          >
+            <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
+            Clasificación
+          </Link>
         </div>
 
         {existingTeamName && existingTeamId && (
@@ -152,7 +152,9 @@ export default function HomePage() {
       </section>
 
       {/* MODAL CREAR EQUIPO */}
-      <img src="/imagenes/Banner_Azul.png" alt="" className="visual-banner" />
+      <footer className="visual-footer">
+        <img src="/imagenes/Banner_Azul.png" alt="" className="visual-banner" />
+      </footer>
 
       {showTeamModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => { setShowTeamModal(false); setTeamError(null) }}>
@@ -164,11 +166,11 @@ export default function HomePage() {
               ✕
             </button>
             <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-2">
-              <span className="text-[var(--sbg-green)]">🚀</span> Registrar Equipo
+              <span className="text-[var(--sbg-green)]">+</span> Registrar Equipo
             </h3>
 
             {teamError && (
-              <div className="mb-4 p-3 rounded-md border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-medium">
+              <div className="mb-4 p-3 rounded-md border border-[var(--sbg-pink)] bg-[var(--sbg-dark)] text-[var(--sbg-pink)] text-sm font-medium">
                 {teamError}
               </div>
             )}
@@ -202,7 +204,7 @@ export default function HomePage() {
       {/* MODAL ADMIN */}
       {showAdminModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => { setShowAdminModal(false); setAdminError(null) }}>
-          <div className="bg-[var(--sbg-dark-2)] border border-[var(--sbg-orange)] shadow-[0_0_15px_rgba(245,158,11,0.2)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
+          <div className="bg-[var(--sbg-dark-2)] border border-[var(--sbg-orange)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => { setShowAdminModal(false); setAdminError(null) }}
               className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
@@ -214,7 +216,7 @@ export default function HomePage() {
             </h3>
 
             {adminError && (
-              <div className="mb-4 p-3 rounded-md border border-red-500/30 bg-red-500/10 text-red-400 text-sm font-medium">
+              <div className="mb-4 p-3 rounded-md border border-[var(--sbg-pink)] bg-[var(--sbg-dark)] text-[var(--sbg-pink)] text-sm font-medium">
                 {adminError}
               </div>
             )}

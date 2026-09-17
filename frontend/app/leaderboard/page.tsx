@@ -229,7 +229,9 @@ export default function LeaderboardPage() {
           La clasificación se actualiza automáticamente. En caso de empate de puntos, gana el equipo con menor tiempo.
         </p>
       </div>
-      <img src="/imagenes/Banner_Naranja.png" alt="" className="visual-banner" />
+      <footer className="visual-footer">
+        <img src="/imagenes/Banner_Naranja.png" alt="" className="visual-banner" />
+      </footer>
     </main>
   )
 }

@@ -154,13 +154,6 @@ export default function AdminPage() {
           </Link>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/leaderboard"
-              className="text-sm font-bold px-4 py-2 rounded-full bg-gradient-to-r from-[var(--sbg-purple)] to-[var(--sbg-pink)] text-white hover:scale-105 transition-transform shadow-[var(--glow-primary)] flex items-center gap-2"
-            >
-              <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
-              <span className="hidden sm:inline">Clasificación</span>
-            </Link>
             <button
               onClick={handleLogout}
               className="text-sm font-semibold px-4 py-2 rounded-full border border-[var(--sbg-dark-3)] text-[var(--text-secondary)] hover:bg-[var(--sbg-dark-2)] transition-colors"
@@ -194,7 +187,7 @@ export default function AdminPage() {
               <h2 className="text-lg font-bold mb-4">Crear Nuevo Equipo</h2>
               <form onSubmit={handleCreateTeam} className="space-y-4">
                 {createError && (
-                  <div className="p-3 text-xs rounded bg-red-500/10 text-red-400 border border-red-500/20">
+                  <div className="p-3 text-xs rounded bg-[var(--sbg-dark)] text-[var(--sbg-pink)] border border-[var(--sbg-pink)]">
                     {createError}
                   </div>
                 )}
@@ -315,7 +308,16 @@ export default function AdminPage() {
         </div>
       </div>
 
-      <img src="/imagenes/Banner_Morado.png" alt="" className="visual-banner" />
+      <div className="max-w-6xl mx-auto w-full px-4 pb-8">
+        <Link href="/leaderboard" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--sbg-orange)] px-5 py-3 font-bold text-[var(--sbg-dark)] hover:bg-[var(--sbg-pink)] transition-colors">
+          <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
+          Clasificación
+        </Link>
+      </div>
+
+      <footer className="visual-footer">
+        <img src="/imagenes/Banner_Morado.png" alt="" className="visual-banner" />
+      </footer>
 
       {/* MODAL GESTION PUNTOS */}
       {selectedTeam && (
@@ -331,7 +333,7 @@ export default function AdminPage() {
             <p className="text-sm text-[var(--sbg-purple)] font-semibold mb-6">{selectedTeam.equipo.nombre}</p>
 
             {gradeError && (
-              <div className="mb-4 p-3 rounded-md border border-red-500/30 bg-red-500/10 text-red-400 text-xs">
+              <div className="mb-4 p-3 rounded-md border border-[var(--sbg-pink)] bg-[var(--sbg-dark)] text-[var(--sbg-pink)] text-xs">
                 {gradeError}
               </div>
             )}

@@ -77,7 +77,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-[var(--sbg-dark)] text-white flex flex-col justify-between">
       {/* Navbar */}
-      <header className="border-b border-white/10 bg-[var(--sbg-dark)]/80 backdrop-blur-md">
+      <header className="border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition">
             <img src="/imagenes/AWS_logo.png" alt="AWS" className="h-10 w-20 object-contain" />
@@ -88,7 +88,7 @@ export default function LoginPage() {
 
           <Link
             href="/"
-            className="text-xs text-gray-400 hover:text-white border border-white/10 px-3 py-1.5 rounded-lg transition"
+            className="text-xs text-[var(--text-secondary)] hover:text-white border border-[var(--sbg-dark-3)] px-3 py-1.5 rounded-lg transition"
           >
             ← Volver al Inicio
           </Link>
@@ -97,21 +97,21 @@ export default function LoginPage() {
 
       {/* Tarjeta de Acceso */}
       <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-[var(--sbg-dark-2)] border border-white/15 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-6">
+        <div className="bg-[var(--sbg-dark-2)] border border-[var(--sbg-dark-3)] rounded-2xl p-6 sm:p-8 max-w-md w-full space-y-6">
           <div className="text-center space-y-1">
             <h1 className="text-2xl font-black text-white">Acceso al Rally</h1>
-            <p className="text-xs text-gray-400">Selecciona tu perfil de acceso</p>
+            <p className="text-xs text-[var(--text-secondary)]">Selecciona tu perfil de acceso</p>
           </div>
 
           {/* Selector de rol */}
-          <div className="flex bg-[var(--sbg-dark)] p-1 rounded-xl border border-white/10">
+          <div className="flex bg-[var(--sbg-dark)] p-1 rounded-xl border border-[var(--sbg-dark-3)]">
             <button
               type="button"
               onClick={() => setRole('equipo')}
               className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                 role === 'equipo'
                   ? 'bg-[var(--sbg-orange)] text-[var(--sbg-dark)] shadow'
-                  : 'text-gray-400 hover:text-white'
+                  : 'text-[var(--text-secondary)] hover:text-white'
               }`}
             >
               👥 Crear Equipo
@@ -122,7 +122,7 @@ export default function LoginPage() {
               className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                 role === 'admin'
                   ? 'bg-[var(--sbg-blue)] text-white shadow'
-                  : 'text-gray-400 hover:text-white'
+                  : 'text-[var(--text-secondary)] hover:text-white'
               }`}
             >
               👨‍💼 Administrador
@@ -133,13 +133,13 @@ export default function LoginPage() {
           {role === 'equipo' && (
             <form onSubmit={handleCreateTeam} className="space-y-4">
               {teamError && (
-                <div className="p-3 rounded-xl bg-red-500/20 border border-red-500/30 text-red-300 text-xs">
+                <div className="p-3 rounded-xl bg-[var(--sbg-dark)] border border-[var(--sbg-pink)] text-[var(--sbg-pink)] text-xs">
                   ⚠️ {teamError}
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-2">
                   Nombre del Equipo:
                 </label>
                 <input
@@ -149,7 +149,7 @@ export default function LoginPage() {
                   placeholder="Ej: CyberTeam AWS"
                   required
                   disabled={teamLoading}
-                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-white/20 rounded-xl text-white outline-none focus:border-[var(--sbg-orange)] text-sm"
+                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-[var(--sbg-dark-3)] rounded-xl text-white outline-none focus:border-[var(--sbg-orange)] text-sm"
                 />
               </div>
 
@@ -167,13 +167,13 @@ export default function LoginPage() {
           {role === 'admin' && (
             <form onSubmit={handleAdminLogin} className="space-y-4">
               {adminError && (
-                <div className="p-3 rounded-xl bg-red-500/20 border border-red-500/30 text-red-300 text-xs">
+                <div className="p-3 rounded-xl bg-[var(--sbg-dark)] border border-[var(--sbg-pink)] text-[var(--sbg-pink)] text-xs">
                   ⚠️ {adminError}
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-2">
                   Usuario o Correo:
                 </label>
                 <input
@@ -183,12 +183,12 @@ export default function LoginPage() {
                   placeholder="admin o admin@rally.com"
                   required
                   disabled={adminLoading}
-                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-white/20 rounded-xl text-white outline-none focus:border-[var(--sbg-blue)] text-sm"
+                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-[var(--sbg-dark-3)] rounded-xl text-white outline-none focus:border-[var(--sbg-blue)] text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider mb-2">
                   Contraseña:
                 </label>
                 <input
@@ -198,7 +198,7 @@ export default function LoginPage() {
                   placeholder="••••••••••••"
                   required
                   disabled={adminLoading}
-                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-white/20 rounded-xl text-white outline-none focus:border-[var(--sbg-blue)] text-sm"
+                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-[var(--sbg-dark-3)] rounded-xl text-white outline-none focus:border-[var(--sbg-blue)] text-sm"
                 />
               </div>
 
@@ -215,7 +215,7 @@ export default function LoginPage() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full border-t border-white/10 py-4 px-4 text-center text-xs text-[var(--text-secondary)] bg-[var(--sbg-dark)]">
+      <footer className="w-full border-t border-[var(--sbg-dark-3)] py-4 px-4 text-center text-xs text-[var(--text-secondary)] bg-[var(--sbg-dark)]">
         AWS CHALLENGE © 2026
       </footer>
     </main>

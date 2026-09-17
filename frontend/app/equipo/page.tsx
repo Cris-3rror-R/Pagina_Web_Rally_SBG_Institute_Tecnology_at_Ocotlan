@@ -153,7 +153,7 @@ function EquipoContent() {
     return (
       <main className="min-h-screen flex items-center justify-center bg-[var(--sbg-dark)] flex-col gap-4 px-4">
         <div className="text-5xl mb-2">⚠️</div>
-        <p className="text-red-400 font-semibold text-center">{error || 'Equipo no encontrado'}</p>
+        <p className="text-[var(--sbg-pink)] font-semibold text-center">{error || 'Equipo no encontrado'}</p>
         <button
           onClick={() => router.push('/')}
           className="mt-2 px-6 py-2 rounded-full bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white font-bold text-sm hover:opacity-90 transition"
@@ -407,7 +407,9 @@ function EquipoContent() {
           </div>
         </div>
       </div>
-      <img src="/imagenes/Banner_Verde.png" alt="" className="visual-banner" />
+      <footer className="visual-footer">
+        <img src="/imagenes/Banner_Verde.png" alt="" className="visual-banner" />
+      </footer>
     </main>
   )
 }

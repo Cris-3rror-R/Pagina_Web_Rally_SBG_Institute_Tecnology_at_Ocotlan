@@ -21,8 +21,6 @@
   --sbg-pink:        #ff57ea;
   --text-primary:    #ffffff;
   --text-secondary:  #656871;
-  --glow-primary:    0 4px 14px 0 rgba(173, 92, 255, 0.35);
-  --glow-accent:     0 4px 14px 0 rgba(68, 180, 255, 0.35);
 }
 
 *, *::before, *::after {
@@ -98,7 +96,7 @@ input, textarea, select {
 }
 input:focus, textarea:focus, select:focus {
   border-color: var(--sbg-purple);
-  box-shadow: 0 0 0 2px rgba(173, 92, 255, 0.25);
+  box-shadow: 0 0 0 2px var(--sbg-purple);
 }
 
 /* Clases Utilitarias */
@@ -116,14 +114,14 @@ input:focus, textarea:focus, select:focus {
   background: var(--sbg-dark-3);
   color: var(--text-primary);
   font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid var(--sbg-dark-3);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   transition: all 0.2s ease;
 }
 .aws-btn-primary:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.2);
+  background: var(--sbg-dark-3);
+  border-color: var(--sbg-dark-3);
 }
 
 .aws-text-gradient {
@@ -183,6 +181,11 @@ input:focus, textarea:focus, select:focus {
   color: #ffffff;
 }
 
+.visual-header > div {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
 .visual-logo {
   width: 104px;
   height: 54px;
@@ -193,18 +196,25 @@ input:focus, textarea:focus, select:focus {
 .visual-content {
   position: relative;
   z-index: 1;
-  padding-bottom: 170px;
+  padding-bottom: 2rem;
+}
+
+.visual-footer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--page-accent);
+  padding: 1rem;
 }
 
 .visual-banner {
-  position: absolute;
-  z-index: 0;
-  bottom: 0;
-  left: 50%;
   width: min(92vw, 920px);
   height: 125px;
   object-fit: contain;
-  transform: translateX(-50%);
   pointer-events: none;
 }
 

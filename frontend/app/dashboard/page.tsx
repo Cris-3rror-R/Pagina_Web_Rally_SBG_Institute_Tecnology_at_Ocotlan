@@ -43,7 +43,7 @@ function DashboardRedirectContent() {
     <div className="min-h-screen bg-[var(--sbg-dark)] flex items-center justify-center text-white">
       <div className="text-center space-y-3">
         <div className="w-10 h-10 border-4 border-[var(--sbg-orange)] border-t-transparent rounded-full animate-spin mx-auto" />
-        <p className="text-gray-400 text-sm">Redirigiendo a tu panel...</p>
+        <p className="text-[var(--text-secondary)] text-sm">Redirigiendo a tu panel...</p>
       </div>
     </div>
   )

@@ -311,7 +311,7 @@ export default function QRScanPage() {
           {state === 'denied' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[var(--sbg-dark-2)] p-6">
               <div className="text-5xl">🚫</div>
-              <p className="text-sm font-bold text-red-400 text-center">Acceso a la cámara denegado</p>
+              <p className="text-sm font-bold text-[var(--sbg-pink)] text-center">Acceso a la cámara denegado</p>
               <p className="text-xs text-[var(--text-secondary)] text-center">
                 Ve a la configuración de tu navegador y permite el acceso a la cámara para este sitio.
               </p>
@@ -350,7 +350,7 @@ export default function QRScanPage() {
           {state === 'error' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-[var(--sbg-dark-2)] p-6">
               <div className="text-5xl">⚠️</div>
-              <p className="text-sm font-bold text-red-400 text-center">{statusMsg}</p>
+              <p className="text-sm font-bold text-[var(--sbg-pink)] text-center">{statusMsg}</p>
               <button
                 onClick={reset}
                 className="px-6 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[var(--sbg-orange)] to-[var(--sbg-purple)]"
