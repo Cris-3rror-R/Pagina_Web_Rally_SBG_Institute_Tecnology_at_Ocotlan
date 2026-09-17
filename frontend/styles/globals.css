@@ -88,7 +88,6 @@ a:hover {
   filter: brightness(0.9);
 }
 button:disabled {
-  background: var(--sbg-dark-3);
   color: var(--text-primary);
   cursor: not-allowed;
 }
@@ -111,6 +110,13 @@ input, textarea, select {
 }
 input:focus, textarea:focus, select:focus {
   border-color: var(--sbg-purple);
+  outline: none;
+  box-shadow: none;
+}
+
+.modal-backdrop {
+  background: rgba(22, 29, 38, 0.75);
+  backdrop-filter: blur(2px);
 }
 
 /* Clases Utilitarias */

@@ -153,15 +153,25 @@ export default function HomePage() {
       </footer>
 
       {showTeamModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black" onClick={() => { setShowTeamModal(false); setTeamError(null) }}>
-          <div className="bg-black border border-[var(--sbg-green)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
+        <div
+          className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="presentation"
+          onClick={() => { setShowTeamModal(false); setTeamError(null) }}
+        >
+          <div
+            className="bg-black border border-[var(--sbg-green)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="team-modal-title"
+            onClick={e => e.stopPropagation()}
+          >
             <button
               onClick={() => { setShowTeamModal(false); setTeamError(null) }}
               className="absolute top-4 right-4 text-white"
             >
               ✕
             </button>
-            <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-2">
+            <h3 id="team-modal-title" className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-2">
               <span className="text-[var(--sbg-green)]">+</span> Registrar Equipo
             </h3>
 
@@ -182,7 +192,7 @@ export default function HomePage() {
                   required
                   autoFocus
                   disabled={teamLoading}
-                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-green)] focus:ring-1 focus:ring-[var(--sbg-green)]"
+                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-green)] focus:ring-0 focus:outline-none"
                 />
               </div>
               <button
@@ -199,15 +209,25 @@ export default function HomePage() {
 
       {/* MODAL ADMIN */}
       {showAdminModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black" onClick={() => { setShowAdminModal(false); setAdminError(null) }}>
-          <div className="bg-black border border-[var(--sbg-purple)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
+        <div
+          className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4"
+          role="presentation"
+          onClick={() => { setShowAdminModal(false); setAdminError(null) }}
+        >
+          <div
+            className="bg-black border border-[var(--sbg-purple)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="admin-modal-title"
+            onClick={e => e.stopPropagation()}
+          >
             <button
               onClick={() => { setShowAdminModal(false); setAdminError(null) }}
               className="absolute top-4 right-4 text-white"
             >
               ✕
             </button>
-            <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-2">
+            <h3 id="admin-modal-title" className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-2">
               <span className="text-[var(--sbg-purple)]">👨‍💻</span> Acceso Admin
             </h3>
 
@@ -228,7 +248,7 @@ export default function HomePage() {
                   required
                   autoFocus
                   disabled={adminLoading}
-                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-purple)] focus:ring-1 focus:ring-[var(--sbg-purple)]"
+                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-purple)] focus:ring-0 focus:outline-none"
                 />
               </div>
               <div>
@@ -240,7 +260,7 @@ export default function HomePage() {
                   placeholder="••••••••"
                   required
                   disabled={adminLoading}
-                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-purple)] focus:ring-1 focus:ring-[var(--sbg-purple)]"
+                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-purple)] focus:ring-0 focus:outline-none"
                 />
               </div>
               <button

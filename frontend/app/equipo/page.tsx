@@ -390,13 +390,13 @@ function EquipoContent() {
               Abrir Cámara
             </Link>
           </div>
-          <div className="rounded-2xl border border-[var(--sbg-purple)] bg-black p-5 sm:p-6 flex flex-col items-center text-center">
+          <div className="rounded-2xl border border-[var(--sbg-orange)] bg-black p-5 sm:p-6 flex flex-col items-center text-center">
             <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-10 w-10 object-contain mb-3" />
             <h3 className="font-bold text-[var(--text-primary)] mb-1 text-base">Clasificación</h3>
             <p className="text-xs text-[var(--text-secondary)] mb-4">Ve tu posición en vivo</p>
             <Link
               href="/leaderboard"
-              className="w-full max-w-xs py-2.5 rounded-full bg-[var(--sbg-purple)] text-white font-bold text-sm text-center"
+              className="w-full max-w-xs py-2.5 rounded-full bg-[var(--sbg-orange)] text-white font-bold text-sm text-center"
             >
               Ver Tabla
             </Link>
