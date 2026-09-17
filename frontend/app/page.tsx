@@ -87,10 +87,6 @@ export default function HomePage() {
 
   return (
     <main className="visual-page visual-blue min-h-screen flex flex-col relative overflow-hidden bg-[var(--sbg-dark)]">
-      {/* Background gradients */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[var(--sbg-purple)] rounded-full blur-[120px] opacity-20 pointer-events-none" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[var(--sbg-blue)] rounded-full blur-[120px] opacity-20 pointer-events-none" />
-
       {/* HEADER */}
       <header className="visual-header sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -104,7 +100,7 @@ export default function HomePage() {
       {/* HERO */}
       <section className="visual-content flex-1 flex flex-col items-center justify-center px-4 py-20 text-center relative z-10">
         
-        <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 max-w-4xl mx-auto text-transparent bg-clip-text bg-gradient-to-r from-white via-[var(--sbg-blue)] to-[var(--sbg-green)] leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 max-w-4xl mx-auto text-white leading-tight">
           AWS CHALLENGE
           <span className="block text-2xl sm:text-3xl md:text-4xl mt-4 text-[var(--text-secondary)] font-semibold">
             Rally de Conocimiento en el Día de ISC y Ciberseguridad
@@ -157,8 +153,8 @@ export default function HomePage() {
       </footer>
 
       {showTeamModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => { setShowTeamModal(false); setTeamError(null) }}>
-          <div className="bg-[var(--sbg-dark-2)] border border-[var(--sbg-purple)] shadow-[var(--glow-primary)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black" onClick={() => { setShowTeamModal(false); setTeamError(null) }}>
+          <div className="bg-black border border-[var(--sbg-purple)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => { setShowTeamModal(false); setTeamError(null) }}
               className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
@@ -192,7 +188,7 @@ export default function HomePage() {
               <button
                 type="submit"
                 disabled={teamLoading || !teamName.trim()}
-                className="w-full py-3.5 bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white font-bold rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 transition-transform hover:scale-105"
+                className="w-full py-3.5 bg-[var(--sbg-blue)] text-white font-bold rounded-xl flex items-center justify-center gap-2"
               >
                 {teamLoading ? <div className="w-5 h-5 rounded-full border-2 border-current border-t-transparent animate-spin" /> : 'Confirmar Registro'}
               </button>
@@ -203,7 +199,7 @@ export default function HomePage() {
 
       {/* MODAL ADMIN */}
       {showAdminModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => { setShowAdminModal(false); setAdminError(null) }}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black" onClick={() => { setShowAdminModal(false); setAdminError(null) }}>
           <div className="bg-[var(--sbg-dark-2)] border border-[var(--sbg-orange)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => { setShowAdminModal(false); setAdminError(null) }}
@@ -250,7 +246,7 @@ export default function HomePage() {
               <button
                 type="submit"
                 disabled={adminLoading || !adminUser.trim() || !adminPassword.trim()}
-                className="w-full py-3.5 bg-gradient-to-r from-[var(--sbg-orange)] to-[var(--sbg-orange-dark)] text-white font-bold rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 transition-transform hover:scale-105"
+                className="w-full py-3.5 bg-[var(--sbg-orange)] text-white font-bold rounded-xl flex items-center justify-center gap-2"
               >
                 {adminLoading ? <div className="w-5 h-5 rounded-full border-2 border-current border-t-transparent animate-spin" /> : 'Iniciar Sesión'}
               </button>

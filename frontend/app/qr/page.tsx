@@ -214,15 +214,13 @@ export default function QRScanPage() {
     <main className="min-h-screen bg-[var(--sbg-dark)] text-[var(--text-primary)] flex flex-col">
       {/* Fondo */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 right-0 w-72 h-72 bg-[var(--sbg-purple)] rounded-full blur-[120px] opacity-10" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[var(--sbg-blue)] rounded-full blur-[120px] opacity-10" />
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]/80 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]">
         <div className="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href={teamId ? `/equipo?id=${teamId}` : '/'} className="w-8 h-8 flex items-center justify-center font-extrabold text-xs rounded-lg bg-gradient-to-br from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white">
+            <Link href={teamId ? `/equipo?id=${teamId}` : '/'} className="w-8 h-8 flex items-center justify-center font-extrabold text-xs rounded-lg bg-[var(--sbg-blue)] text-white">
               AWS
             </Link>
             <div>
@@ -242,7 +240,7 @@ export default function QRScanPage() {
       <div className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-5 relative z-10">
         {/* Instrucciones */}
         <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-4">
-          <h1 className="text-lg font-extrabold mb-1 text-transparent bg-clip-text bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)]">
+          <h1 className="text-lg font-extrabold mb-1 text-white">
             Escanear Código QR
           </h1>
           <p className="text-xs text-[var(--text-secondary)]">
@@ -275,7 +273,7 @@ export default function QRScanPage() {
                 <div className="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-[var(--sbg-green)] rounded-bl-sm" />
                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[var(--sbg-green)] rounded-br-sm" />
                 {/* Línea de escaneo animada */}
-                <div className="absolute inset-x-2 top-1/2 h-0.5 bg-gradient-to-r from-transparent via-[var(--sbg-green)] to-transparent animate-pulse" />
+                <div className="absolute inset-x-2 top-1/2 h-0.5 bg-[var(--sbg-green)] animate-pulse" />
               </div>
             </div>
           )}
@@ -289,7 +287,7 @@ export default function QRScanPage() {
               </p>
               <button
                 onClick={startCamera}
-                className="px-8 py-3 rounded-full font-bold text-sm text-white bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] hover:opacity-90 transition-opacity shadow-[var(--glow-primary)]"
+                className="px-8 py-3 rounded-full font-bold text-sm text-white bg-[var(--sbg-blue)]"
               >
                 📷 Activar Cámara
               </button>
@@ -317,7 +315,7 @@ export default function QRScanPage() {
               </p>
               <button
                 onClick={startCamera}
-                className="mt-2 px-6 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)]"
+                className="mt-2 px-6 py-2 rounded-full text-sm font-bold text-white bg-[var(--sbg-blue)]"
               >
                 Reintentar
               </button>
@@ -332,7 +330,7 @@ export default function QRScanPage() {
               <div className="flex gap-3 flex-wrap justify-center">
                 <button
                   onClick={() => router.push(teamId ? `/equipo?id=${teamId}` : '/')}
-                  className="px-6 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[var(--sbg-green)] to-[var(--sbg-blue)]"
+                  className="px-6 py-2 rounded-full text-sm font-bold text-black bg-[var(--sbg-green)]"
                 >
                   Ver mi panel
                 </button>
@@ -353,7 +351,7 @@ export default function QRScanPage() {
               <p className="text-sm font-bold text-[var(--sbg-pink)] text-center">{statusMsg}</p>
               <button
                 onClick={reset}
-                className="px-6 py-2 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[var(--sbg-orange)] to-[var(--sbg-purple)]"
+                className="px-6 py-2 rounded-full text-sm font-bold text-white bg-[var(--sbg-orange)]"
               >
                 Intentar de nuevo
               </button>
@@ -369,7 +367,7 @@ export default function QRScanPage() {
                 onClick={toggleTorch}
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
                   torchOn
-                    ? 'bg-[var(--sbg-orange)]/20 border-[var(--sbg-orange)]/50 text-[var(--sbg-orange)]'
+                    ? 'bg-black border-[var(--sbg-orange)] text-white'
                     : 'border-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
                 }`}
               >
@@ -387,7 +385,7 @@ export default function QRScanPage() {
 
         {/* Indicador de carga jsQR */}
         {state === 'scanning' && !jsQR && (
-          <div className="rounded-xl border border-[var(--sbg-orange)]/30 bg-[var(--sbg-orange)]/5 p-3 text-xs text-[var(--sbg-orange)] text-center">
+          <div className="rounded-xl border border-[var(--sbg-orange)] bg-black p-3 text-xs text-white text-center">
             ⏳ Cargando motor de escaneo... Usa la entrada manual si tarda mucho.
           </div>
         )}
@@ -417,7 +415,7 @@ export default function QRScanPage() {
             <button
               type="submit"
               disabled={!manualCode.trim()}
-              className="min-h-12 px-6 py-3 text-sm font-bold rounded-xl bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white disabled:opacity-50"
+              className="min-h-12 px-6 py-3 text-sm font-bold rounded-xl bg-[var(--sbg-blue)] text-white"
             >
               Registrar
             </button>

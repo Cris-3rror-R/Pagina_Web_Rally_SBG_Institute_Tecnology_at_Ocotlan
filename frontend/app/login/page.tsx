@@ -79,7 +79,7 @@ export default function LoginPage() {
       {/* Navbar */}
       <header className="border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition">
+          <Link href="/" className="flex items-center gap-2 transition">
             <img src="/imagenes/AWS_logo.png" alt="AWS" className="h-10 w-20 object-contain" />
             <span className="font-bold text-sm hidden sm:inline text-white">
               AWS CHALLENGE
@@ -156,7 +156,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={teamLoading || !teamName.trim()}
-                className="w-full py-3 px-6 bg-[var(--sbg-orange)] hover:bg-[var(--sbg-pink)] text-[var(--sbg-dark)] font-black text-base rounded-xl shadow-lg transition transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                className="w-full py-3 px-6 bg-[var(--sbg-orange)] hover:bg-[var(--sbg-pink)] text-white font-black text-base rounded-xl transition"
               >
                 {teamLoading ? 'Creando...' : 'Crear'}
               </button>
@@ -205,7 +205,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={adminLoading || !adminUser.trim() || !adminPassword.trim()}
-                className="w-full py-3 px-6 bg-[var(--sbg-blue)] hover:bg-[var(--sbg-purple)] text-white font-black text-base rounded-xl shadow-lg transition transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                className="w-full py-3 px-6 bg-[var(--sbg-blue)] hover:bg-[var(--sbg-purple)] text-white font-black text-base rounded-xl transition"
               >
                 {adminLoading ? 'Verificando...' : 'Entrar'}
               </button>

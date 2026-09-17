@@ -45,10 +45,6 @@ export default function LeaderboardPage() {
 
   return (
     <main className="visual-page visual-orange min-h-screen flex flex-col relative overflow-hidden bg-[var(--sbg-dark)] text-[var(--text-primary)]">
-      {/* Background gradients */}
-      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-[var(--sbg-purple)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-[var(--sbg-blue)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
-
       {/* HEADER */}
       <header className="visual-header sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -58,7 +54,7 @@ export default function LeaderboardPage() {
           </Link>
 
           <div className="flex items-center gap-4">
-            <span className="text-xs font-bold tracking-wide flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--sbg-green)]/10 text-[var(--sbg-green)] border border-[var(--sbg-green)]/30 uppercase">
+            <span className="text-xs font-bold tracking-wide flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--sbg-green)] text-black border border-[var(--sbg-green)] uppercase">
               <span className="w-2 h-2 rounded-full bg-[var(--sbg-green)] animate-pulse" />
               En Vivo
             </span>
@@ -80,7 +76,7 @@ export default function LeaderboardPage() {
       <div className="visual-content flex-1 max-w-7xl mx-auto w-full px-4 py-10 space-y-8 relative z-10">
         {/* CABECERA */}
         <section className="space-y-2">
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[var(--sbg-blue)] via-[var(--sbg-purple)] to-[var(--sbg-pink)]">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
             Clasificación General
           </h1>
           <p className="text-sm text-[var(--text-secondary)]">
@@ -107,7 +103,7 @@ export default function LeaderboardPage() {
               <button
                 onClick={fetchLeaderboard}
                 disabled={loading}
-                className="px-4 py-2 text-sm font-bold bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white rounded-lg disabled:opacity-50 flex-shrink-0 transition-transform hover:scale-105"
+                className="px-4 py-2 text-sm font-bold bg-[var(--sbg-orange)] text-white rounded-lg flex-shrink-0"
               >
                 {loading ? '...' : 'Actualizar'}
               </button>
@@ -143,7 +139,7 @@ export default function LeaderboardPage() {
                     return (
                       <tr
                         key={entry.equipo_id}
-                        className={`hover:bg-[var(--sbg-dark-3)] transition-colors ${rank <= 3 ? 'bg-[var(--sbg-dark)]/50' : 'bg-[var(--sbg-dark-2)]'}`}
+                        className="bg-[var(--sbg-dark-2)] hover:bg-[var(--sbg-dark-3)] transition-colors"
                       >
                         {/* POSICIÓN */}
                         <td className="py-4 px-4 text-center">
@@ -160,9 +156,9 @@ export default function LeaderboardPage() {
                           </p>
                           <span className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block font-semibold
                             ${entry.estado === 'finalizado'
-                              ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)] border border-[var(--sbg-green)]/20'
+                              ? 'bg-[var(--sbg-green)] text-black border border-[var(--sbg-green)]'
                               : entry.estado === 'en_progreso'
-                              ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)] border border-[var(--sbg-blue)]/20'
+                              ? 'bg-[var(--sbg-blue)] text-black border border-[var(--sbg-blue)]'
                               : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'}`}
                           >
                             {entry.estado === 'finalizado' ? '✅ Finalizado' : entry.estado === 'en_progreso' ? '⏱️ En Carrera' : '⏳ Esperando'}
@@ -194,9 +190,9 @@ export default function LeaderboardPage() {
                         <td className="py-5 px-5 text-center">
                           <span className={`inline-flex px-3 py-1 rounded-full text-sm font-bold ${
                             entry.estado === 'finalizado'
-                              ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)]'
+                              ? 'bg-[var(--sbg-green)] text-black'
                               : entry.estado === 'en_progreso'
-                              ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)]'
+                              ? 'bg-[var(--sbg-blue)] text-black'
                               : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
                           }`}>
                             {entry.estado === 'finalizado' ? 'Final' : entry.estado === 'en_progreso' ? 'Activo' : 'Esperando'}

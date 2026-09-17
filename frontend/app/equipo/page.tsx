@@ -156,7 +156,7 @@ function EquipoContent() {
         <p className="text-[var(--sbg-pink)] font-semibold text-center">{error || 'Equipo no encontrado'}</p>
         <button
           onClick={() => router.push('/')}
-          className="mt-2 px-6 py-2 rounded-full bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white font-bold text-sm hover:opacity-90 transition"
+          className="mt-2 px-6 py-2 rounded-full bg-[var(--sbg-green)] text-black font-bold text-sm"
         >
           Ir al inicio
         </button>
@@ -178,10 +178,6 @@ function EquipoContent() {
 
   return (
     <main className="visual-page visual-green min-h-screen flex flex-col bg-[var(--sbg-dark)] text-[var(--text-primary)] relative overflow-hidden">
-      {/* Fondo decorativo */}
-      <div className="fixed top-[-15%] right-[-10%] w-[50%] sm:w-[35%] h-[40%] bg-[var(--sbg-purple)] rounded-full blur-[150px] opacity-10 pointer-events-none" />
-      <div className="fixed bottom-[-15%] left-[-10%] w-[50%] sm:w-[35%] h-[40%] bg-[var(--sbg-blue)] rounded-full blur-[150px] opacity-10 pointer-events-none" />
-
       {/* ── NAVBAR ─────────────────────────────────────────────────────────── */}
       <nav className="visual-header sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
@@ -197,9 +193,9 @@ function EquipoContent() {
             {/* Badge de estado */}
             <div className={`hidden sm:flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
               estadoEquipo === 'finalizado'
-                ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)] border-[var(--sbg-green)]/30'
+                ? 'bg-[var(--sbg-green)] text-black border-[var(--sbg-green)]'
                 : estadoEquipo === 'en_progreso'
-                ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)] border-[var(--sbg-blue)]/30'
+                ? 'bg-[var(--sbg-blue)] text-black border-[var(--sbg-blue)]'
                 : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)] border-[var(--sbg-dark-3)]'
             }`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse inline-block" />
@@ -221,7 +217,7 @@ function EquipoContent() {
         <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-5 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="min-w-0">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-1 text-transparent bg-clip-text bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] leading-tight">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-1 text-white leading-tight">
                 ¡Bienvenido, {team.nombre}!
               </h1>
               <p className="text-xs sm:text-sm text-[var(--text-secondary)]">
@@ -231,9 +227,9 @@ function EquipoContent() {
             {/* Badge de estado móvil */}
             <div className={`sm:hidden self-start flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
               estadoEquipo === 'finalizado'
-                ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)] border-[var(--sbg-green)]/30'
+                ? 'bg-[var(--sbg-green)] text-black border-[var(--sbg-green)]'
                 : estadoEquipo === 'en_progreso'
-                ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)] border-[var(--sbg-blue)]/30'
+                ? 'bg-[var(--sbg-blue)] text-black border-[var(--sbg-blue)]'
                 : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)] border-[var(--sbg-dark-3)]'
             }`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse inline-block" />
@@ -321,7 +317,7 @@ function EquipoContent() {
                   key={prog.station.estacion_id}
                   className={`rounded-2xl p-4 sm:p-5 border transition-all ${
                     prog.completado
-                      ? 'border-[var(--sbg-green)]/40 bg-gradient-to-br from-[var(--sbg-green)]/5 to-[var(--sbg-dark-2)]'
+                      ? 'border-[var(--sbg-green)] bg-black'
                       : 'border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)]'
                   }`}
                 >
@@ -389,18 +385,18 @@ function EquipoContent() {
             <p className="text-xs text-[var(--text-secondary)] mb-4">Inicia o finaliza tu desafío</p>
             <Link
               href="/qr"
-              className="w-full max-w-xs py-2.5 rounded-full bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white font-bold text-sm text-center hover:opacity-90 transition-opacity shadow-[var(--glow-primary)]"
+              className="w-full max-w-xs py-2.5 rounded-full bg-[var(--sbg-green)] text-black font-bold text-sm text-center"
             >
               Abrir Cámara
             </Link>
           </div>
-          <div className="rounded-2xl border border-[var(--sbg-purple)]/30 bg-gradient-to-br from-[var(--sbg-purple)]/5 to-[var(--sbg-dark-2)] p-5 sm:p-6 flex flex-col items-center text-center">
+          <div className="rounded-2xl border border-[var(--sbg-purple)] bg-black p-5 sm:p-6 flex flex-col items-center text-center">
             <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-10 w-10 object-contain mb-3" />
             <h3 className="font-bold text-[var(--text-primary)] mb-1 text-base">Clasificación</h3>
             <p className="text-xs text-[var(--text-secondary)] mb-4">Ve tu posición en vivo</p>
             <Link
               href="/leaderboard"
-              className="w-full max-w-xs py-2.5 rounded-full bg-gradient-to-r from-[var(--sbg-purple)] to-[var(--sbg-pink)] text-white font-bold text-sm text-center hover:opacity-90 transition-opacity shadow-[var(--glow-primary)]"
+              className="w-full max-w-xs py-2.5 rounded-full bg-[var(--sbg-purple)] text-white font-bold text-sm text-center"
             >
               Ver Tabla
             </Link>

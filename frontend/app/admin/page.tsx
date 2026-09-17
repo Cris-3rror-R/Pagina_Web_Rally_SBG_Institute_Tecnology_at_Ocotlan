@@ -141,9 +141,6 @@ export default function AdminPage() {
 
   return (
     <main className="visual-page visual-purple min-h-screen flex flex-col bg-[var(--sbg-dark)] text-[var(--text-primary)] relative overflow-hidden">
-      <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-[var(--sbg-purple)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-[var(--sbg-blue)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
-      
       {/* HEADER */}
       <header className="visual-header sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -169,7 +166,7 @@ export default function AdminPage() {
         {/* BANNER */}
         <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)]">Panel de Administración</h1>
+            <h1 className="text-2xl font-extrabold text-white">Panel de Administración</h1>
             <p className="text-[var(--text-secondary)] text-sm">Gestiona equipos y puntajes en tiempo real</p>
           </div>
           <div className="text-right">
@@ -204,7 +201,7 @@ export default function AdminPage() {
                 <button
                   type="submit"
                   disabled={creating || !newTeamName.trim()}
-                  className="w-full py-2.5 bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white font-bold rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 transition-transform hover:scale-105"
+                  className="w-full py-2.5 bg-[var(--sbg-purple)] text-white font-bold rounded-xl flex items-center justify-center gap-2"
                 >
                   {creating ? 'Creando...' : 'Crear Equipo'}
                 </button>
@@ -276,9 +273,9 @@ export default function AdminPage() {
                       </div>
                       <span className={`self-start text-xs font-bold px-3 py-1 rounded-full ${
                         equipo.tiempo_final
-                          ? 'bg-[var(--sbg-green)]/10 text-[var(--sbg-green)]'
+                          ? 'bg-[var(--sbg-green)] text-black'
                           : equipo.tiempo_inicio
-                          ? 'bg-[var(--sbg-blue)]/10 text-[var(--sbg-blue)]'
+                          ? 'bg-[var(--sbg-blue)] text-black'
                           : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
                       }`}>{status}</span>
                       
@@ -295,7 +292,7 @@ export default function AdminPage() {
 
                       <button
                         onClick={() => handleOpenGrading({ equipo, progress })}
-                        className="mt-5 w-full py-3 text-sm font-bold rounded-xl bg-gradient-to-r from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white hover:opacity-90 transition-opacity"
+                        className="mt-5 w-full py-3 text-sm font-bold rounded-xl bg-[var(--sbg-purple)] text-white"
                       >
                         Gestionar Puntos
                       </button>
@@ -321,8 +318,8 @@ export default function AdminPage() {
 
       {/* MODAL GESTION PUNTOS */}
       {selectedTeam && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedTeam(null)}>
-          <div className="aws-card p-7 sm:p-8 max-w-3xl w-full relative shadow-2xl" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black" onClick={() => setSelectedTeam(null)}>
+          <div className="aws-card p-7 sm:p-8 max-w-3xl w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setSelectedTeam(null)}
               className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
@@ -385,7 +382,7 @@ export default function AdminPage() {
                     <button
                       onClick={() => handleSavePoints(estacionId)}
                       disabled={grading}
-                      className="px-4 py-2.5 text-sm font-bold bg-[var(--sbg-purple)] text-white rounded-xl hover:bg-[var(--sbg-pink)] transition-colors disabled:opacity-50"
+                      className="px-4 py-2.5 text-sm font-bold bg-[var(--sbg-purple)] text-white rounded-xl hover:bg-[var(--sbg-pink)] transition-colors"
                     >
                       {grading ? '...' : 'Guardar'}
                     </button>
