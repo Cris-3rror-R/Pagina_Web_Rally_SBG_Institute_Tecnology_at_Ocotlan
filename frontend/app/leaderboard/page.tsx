@@ -54,18 +54,14 @@ export default function LeaderboardPage() {
           </Link>
 
           <div className="flex items-center gap-4">
-            <span className="text-xs font-bold tracking-wide flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--sbg-green)] text-black border border-[var(--sbg-green)] uppercase">
-              <span className="w-2 h-2 rounded-full bg-[var(--sbg-green)] animate-pulse" />
-              En Vivo
-            </span>
             <Link
               href="/"
-              className="text-sm font-bold px-4 py-2 rounded-full border border-[var(--sbg-dark-3)] text-[var(--text-secondary)] hover:bg-[var(--sbg-dark-2)] transition-colors"
+              className="text-sm font-bold px-4 py-2 rounded-full bg-[var(--sbg-orange)] text-white"
             >
               ← Inicio
             </Link>
             {adminName && (
-              <Link href="/admin" className="text-sm font-bold text-white hover:text-[var(--sbg-blue)]">
+              <Link href="/admin" className="text-sm font-bold text-white">
                 Panel Admin · {adminName}
               </Link>
             )}
@@ -86,7 +82,7 @@ export default function LeaderboardPage() {
         </section>
 
         {/* TABLA */}
-        <section className="rounded-2xl overflow-hidden border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)]">
+        <section className="rounded-2xl overflow-hidden border border-[var(--sbg-orange)] bg-black">
           {/* BARRA BUSQUEDA */}
           <div className="p-4 border-b border-[var(--sbg-dark-3)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <h2 className="font-bold text-base">
@@ -139,7 +135,7 @@ export default function LeaderboardPage() {
                     return (
                       <tr
                         key={entry.equipo_id}
-                        className="bg-[var(--sbg-dark-2)] hover:bg-[var(--sbg-dark-3)] transition-colors"
+                        className="bg-black hover:bg-[var(--sbg-dark-3)] transition-colors"
                       >
                         {/* POSICIÓN */}
                         <td className="py-4 px-4 text-center">

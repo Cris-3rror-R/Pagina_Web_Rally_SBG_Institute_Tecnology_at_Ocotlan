@@ -203,7 +203,7 @@ function EquipoContent() {
             </div>
             <button
               onClick={handleLogout}
-              className="shrink-0 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-[var(--sbg-dark-3)] text-[var(--text-secondary)] hover:bg-[var(--sbg-dark-2)] transition-colors"
+              className="shrink-0 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-[var(--sbg-green)] text-white"
             >
               Salir
             </button>
@@ -214,7 +214,7 @@ function EquipoContent() {
       <div className="visual-content flex-1 max-w-7xl mx-auto px-4 py-6 sm:py-8 w-full space-y-5 sm:space-y-6 relative z-10">
 
         {/* ── BANNER BIENVENIDA ──────────────────────────────────────────── */}
-        <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-5 sm:p-6">
+        <div className="rounded-2xl border border-[var(--sbg-green)] bg-black p-5 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="min-w-0">
               <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold mb-1 text-white leading-tight">
@@ -251,31 +251,31 @@ function EquipoContent() {
               value: totalPuntos,
               icon: '/imagenes/Trofeo_Icono.png',
               color: 'text-[var(--sbg-orange)]',
-              border: 'border-[var(--sbg-orange)]/25'
+              border: 'border-[var(--sbg-orange)]'
             },
             {
               label: 'Estaciones',
               value: totalStations > 0 ? `${completadas}/${totalStations}` : '0/0',
               icon: '📍',
               color: 'text-[var(--sbg-blue)]',
-              border: 'border-[var(--sbg-blue)]/25'
+              border: 'border-[var(--sbg-blue)]'
             },
             {
               label: estadoEquipo === 'finalizado' ? 'Tiempo Final' : 'Tiempo',
               value: tiempoDisplay,
               icon: '/imagenes/Reloj.png',
               color: estadoEquipo === 'finalizado' ? 'text-[var(--sbg-green)]' : 'text-[var(--sbg-green)]',
-              border: 'border-[var(--sbg-green)]/25'
+              border: 'border-[var(--sbg-green)]'
             },
             {
               label: 'Estado',
               value: estadoEquipo === 'finalizado' ? 'FINAL' : estadoEquipo === 'en_progreso' ? 'ACTIVO' : 'ESPERA',
               icon: estadoEquipo === 'finalizado' ? '✅' : estadoEquipo === 'en_progreso' ? '🔥' : '⏳',
               color: 'text-[var(--sbg-purple)]',
-              border: 'border-[var(--sbg-purple)]/25'
+              border: 'border-[var(--sbg-purple)]'
             },
           ].map(stat => (
-            <div key={stat.label} className={`rounded-2xl border ${stat.border} bg-[var(--sbg-dark-2)] p-4 sm:p-5`}>
+            <div key={stat.label} className={`rounded-2xl border ${stat.border} bg-black p-4 sm:p-5`}>
               <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <p className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider leading-tight">{stat.label}</p>
                 {stat.icon.startsWith('/') ? (
@@ -296,14 +296,14 @@ function EquipoContent() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg sm:text-xl font-extrabold text-[var(--text-primary)]">Progreso de Estaciones</h2>
             {totalStations > 0 && (
-              <span className="text-xs text-[var(--text-secondary)] bg-[var(--sbg-dark-2)] px-3 py-1 rounded-full border border-[var(--sbg-dark-3)]">
+              <span className="text-xs text-[var(--text-secondary)] bg-black px-3 py-1 rounded-full border border-[var(--sbg-dark-3)]">
                 {completadas} de {totalStations} completadas
               </span>
             )}
           </div>
 
           {progress.length === 0 ? (
-            <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-8 sm:p-12 text-center">
+            <div className="rounded-2xl border border-[var(--sbg-green)] bg-black p-8 sm:p-12 text-center">
               <div className="text-4xl mb-3">📡</div>
               <p className="text-[var(--text-secondary)] text-sm font-medium">
                 Las estaciones del rally aún no están disponibles.
@@ -318,7 +318,7 @@ function EquipoContent() {
                   className={`rounded-2xl p-4 sm:p-5 border transition-all ${
                     prog.completado
                       ? 'border-[var(--sbg-green)] bg-black'
-                      : 'border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)]'
+                      : 'border-[var(--sbg-dark-3)] bg-black'
                   }`}
                 >
                   {/* Header de estación */}
@@ -379,7 +379,7 @@ function EquipoContent() {
 
         {/* ── ACCIONES ──────────────────────────────────────────────────── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pb-6">
-          <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-5 sm:p-6 flex flex-col items-center text-center">
+          <div className="rounded-2xl border border-[var(--sbg-green)] bg-black p-5 sm:p-6 flex flex-col items-center text-center">
             <span className="text-3xl sm:text-4xl mb-3">📱</span>
             <h3 className="font-bold text-[var(--text-primary)] mb-1 text-base">Escanear QR</h3>
             <p className="text-xs text-[var(--text-secondary)] mb-4">Inicia o finaliza tu desafío</p>

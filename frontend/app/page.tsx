@@ -114,19 +114,19 @@ export default function HomePage() {
         <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto">
           <button
             onClick={() => setShowAdminModal(true)}
-            className="w-full py-4 text-base font-bold text-white bg-[var(--sbg-purple)] rounded-xl hover:bg-[var(--sbg-pink)] transition-all"
+            className="w-full py-4 text-base font-bold text-white bg-[var(--sbg-purple)] rounded-xl"
           >
             Administrador
           </button>
           <button
             onClick={() => setShowTeamModal(true)}
-            className="w-full py-4 text-base font-bold text-[var(--sbg-dark)] bg-[var(--sbg-green)] rounded-xl hover:bg-[var(--sbg-blue)] transition-all"
+            className="w-full py-4 text-base font-bold text-white bg-[var(--sbg-green)] rounded-xl"
           >
             Crear Equipo
           </button>
           <Link
             href="/leaderboard"
-            className="w-full py-4 text-base font-bold text-[var(--sbg-dark)] bg-[var(--sbg-blue)] rounded-xl hover:bg-[var(--sbg-green)] transition-all flex items-center justify-center gap-2"
+            className="w-full py-4 text-base font-bold text-white bg-[var(--sbg-orange)] rounded-xl flex items-center justify-center gap-2"
           >
             <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
             Clasificación
@@ -188,7 +188,7 @@ export default function HomePage() {
               <button
                 type="submit"
                 disabled={teamLoading || !teamName.trim()}
-                className="w-full py-3.5 bg-[var(--sbg-blue)] text-white font-bold rounded-xl flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-[var(--sbg-green)] text-white font-bold rounded-xl flex items-center justify-center gap-2"
               >
                 {teamLoading ? <div className="w-5 h-5 rounded-full border-2 border-current border-t-transparent animate-spin" /> : 'Confirmar Registro'}
               </button>
@@ -200,7 +200,7 @@ export default function HomePage() {
       {/* MODAL ADMIN */}
       {showAdminModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black" onClick={() => { setShowAdminModal(false); setAdminError(null) }}>
-          <div className="bg-[var(--sbg-dark-2)] border border-[var(--sbg-orange)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
+          <div className="bg-black border border-[var(--sbg-purple)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => { setShowAdminModal(false); setAdminError(null) }}
               className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
@@ -208,7 +208,7 @@ export default function HomePage() {
               ✕
             </button>
             <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)] flex items-center gap-2">
-              <span className="text-[var(--sbg-orange)]">👨‍💻</span> Acceso Admin
+              <span className="text-[var(--sbg-purple)]">👨‍💻</span> Acceso Admin
             </h3>
 
             {adminError && (
@@ -228,7 +228,7 @@ export default function HomePage() {
                   required
                   autoFocus
                   disabled={adminLoading}
-                  className="w-full bg-[var(--sbg-dark)] border-[var(--sbg-dark-3)] focus:border-[var(--sbg-orange)] focus:ring-1 focus:ring-[var(--sbg-orange)]"
+                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-purple)] focus:ring-1 focus:ring-[var(--sbg-purple)]"
                 />
               </div>
               <div>
@@ -240,13 +240,13 @@ export default function HomePage() {
                   placeholder="••••••••"
                   required
                   disabled={adminLoading}
-                  className="w-full bg-[var(--sbg-dark)] border-[var(--sbg-dark-3)] focus:border-[var(--sbg-orange)] focus:ring-1 focus:ring-[var(--sbg-orange)]"
+                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-purple)] focus:ring-1 focus:ring-[var(--sbg-purple)]"
                 />
               </div>
               <button
                 type="submit"
                 disabled={adminLoading || !adminUser.trim() || !adminPassword.trim()}
-                className="w-full py-3.5 bg-[var(--sbg-orange)] text-white font-bold rounded-xl flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-[var(--sbg-purple)] text-white font-bold rounded-xl flex items-center justify-center gap-2"
               >
                 {adminLoading ? <div className="w-5 h-5 rounded-full border-2 border-current border-t-transparent animate-spin" /> : 'Iniciar Sesión'}
               </button>

@@ -156,7 +156,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={teamLoading || !teamName.trim()}
-                className="w-full py-3 px-6 bg-[var(--sbg-orange)] hover:bg-[var(--sbg-pink)] text-white font-black text-base rounded-xl transition"
+                className="w-full py-3 px-6 bg-[var(--sbg-orange)] text-white font-black text-base rounded-xl transition"
               >
                 {teamLoading ? 'Creando...' : 'Crear'}
               </button>
@@ -205,7 +205,7 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={adminLoading || !adminUser.trim() || !adminPassword.trim()}
-                className="w-full py-3 px-6 bg-[var(--sbg-blue)] hover:bg-[var(--sbg-purple)] text-white font-black text-base rounded-xl transition"
+                className="w-full py-3 px-6 bg-[var(--sbg-blue)] text-white font-black text-base rounded-xl transition"
               >
                 {adminLoading ? 'Verificando...' : 'Entrar'}
               </button>

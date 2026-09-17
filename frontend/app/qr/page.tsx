@@ -211,17 +211,17 @@ export default function QRScanPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[var(--sbg-dark)] text-[var(--text-primary)] flex flex-col">
+    <main className="visual-page visual-green min-h-screen bg-[var(--sbg-dark)] text-[var(--text-primary)] flex flex-col">
       {/* Fondo */}
       <div className="fixed inset-0 pointer-events-none">
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]">
+      <header className="visual-header sticky top-0 z-30">
         <div className="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Link href={teamId ? `/equipo?id=${teamId}` : '/'} className="w-8 h-8 flex items-center justify-center font-extrabold text-xs rounded-lg bg-[var(--sbg-blue)] text-white">
-              AWS
+            <Link href={teamId ? `/equipo?id=${teamId}` : '/'} className="flex items-center">
+              <img src="/imagenes/AWS_logo.png" alt="AWS" className="visual-logo" />
             </Link>
             <div>
               <p className="text-xs font-bold text-[var(--text-primary)]">Escáner QR</p>
@@ -237,9 +237,9 @@ export default function QRScanPage() {
         </div>
       </header>
 
-      <div className="flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-5 relative z-10">
+      <div className="visual-content flex-1 max-w-xl mx-auto w-full px-4 py-6 flex flex-col gap-5 relative z-10">
         {/* Instrucciones */}
-        <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-4">
+        <div className="rounded-2xl border border-[var(--sbg-green)] bg-black p-4">
           <h1 className="text-lg font-extrabold mb-1 text-white">
             Escanear Código QR
           </h1>
@@ -398,7 +398,7 @@ export default function QRScanPage() {
         )}
 
         {/* Fallback: Entrada manual */}
-        <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-5">
+        <div className="rounded-2xl border border-[var(--sbg-green)] bg-black p-5">
           <h2 className="text-base sm:text-lg font-bold mb-1 text-[var(--text-primary)]">Registrar código manualmente</h2>
           <p className="text-xs text-[var(--text-secondary)] mb-3">
             Escribe la palabra configurada por el administrador y pulsa Registrar.
@@ -425,6 +425,9 @@ export default function QRScanPage() {
           )}
         </div>
       </div>
+      <footer className="visual-footer">
+        <img src="/imagenes/Banner_Verde.png" alt="" className="visual-banner" />
+      </footer>
     </main>
   )
 }

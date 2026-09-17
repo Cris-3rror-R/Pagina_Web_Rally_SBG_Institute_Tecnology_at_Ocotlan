@@ -20,7 +20,7 @@
   --sbg-purple-dark: #ad5cff;
   --sbg-pink:        #ff57ea;
   --text-primary:    #ffffff;
-  --text-secondary:  #ffffff;
+  --text-secondary:  #656871;
 }
 
 *, *::before, *::after {
@@ -72,6 +72,11 @@ button {
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   transition: all 0.2s ease;
+}
+
+button:hover:not(:disabled),
+a:hover {
+  filter: brightness(0.9);
 }
 button:disabled {
   background: var(--sbg-dark-3);

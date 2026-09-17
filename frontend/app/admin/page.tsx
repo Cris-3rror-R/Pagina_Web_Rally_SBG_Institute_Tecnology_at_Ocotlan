@@ -164,7 +164,7 @@ export default function AdminPage() {
       <div className="visual-content flex-1 max-w-6xl mx-auto w-full px-4 py-8 space-y-8 relative z-10">
         
         {/* BANNER */}
-        <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="rounded-2xl border border-[var(--sbg-purple)] bg-black p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-2xl font-extrabold text-white">Panel de Administración</h1>
             <p className="text-[var(--text-secondary)] text-sm">Gestiona equipos y puntajes en tiempo real</p>
@@ -267,7 +267,7 @@ export default function AdminPage() {
                       <div className="flex items-start justify-between mb-5">
                         <div>
                           <p className="text-xs uppercase tracking-wider text-[var(--text-secondary)] mb-1">Equipo</p>
-                          <h3 className="text-xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--sbg-purple)] transition-colors">{equipo.nombre}</h3>
+                          <h3 className="text-xl font-extrabold text-[var(--text-primary)]">{equipo.nombre}</h3>
                         </div>
                         <span className="text-xs text-[var(--text-secondary)] font-mono">{equipo.equipo_id.split('-')[0]}</span>
                       </div>
@@ -306,7 +306,7 @@ export default function AdminPage() {
       </div>
 
       <div className="max-w-6xl mx-auto w-full px-4 pb-8">
-        <Link href="/leaderboard" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--sbg-orange)] px-5 py-3 font-bold text-[var(--sbg-dark)] hover:bg-[var(--sbg-pink)] transition-colors">
+        <Link href="/leaderboard" className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--sbg-orange)] px-5 py-3 font-bold text-white">
           <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
           Clasificación
         </Link>
@@ -382,7 +382,7 @@ export default function AdminPage() {
                     <button
                       onClick={() => handleSavePoints(estacionId)}
                       disabled={grading}
-                      className="px-4 py-2.5 text-sm font-bold bg-[var(--sbg-purple)] text-white rounded-xl hover:bg-[var(--sbg-pink)] transition-colors"
+                      className="px-4 py-2.5 text-sm font-bold bg-[var(--sbg-purple)] text-white rounded-xl"
                     >
                       {grading ? '...' : 'Guardar'}
                     </button>
