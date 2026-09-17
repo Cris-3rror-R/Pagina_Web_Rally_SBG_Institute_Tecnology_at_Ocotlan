@@ -20,7 +20,7 @@
   --sbg-purple-dark: #ad5cff;
   --sbg-pink:        #ff57ea;
   --text-primary:    #ffffff;
-  --text-secondary:  #656871;
+  --text-secondary:    #ffffff;
 }
 
 *, *::before, *::after {
@@ -41,6 +41,15 @@ body {
   background-color: #161d26;
   color: var(--text-primary);
   line-height: 1.6;
+}
+
+body :is(button, a, label, p, span, h1, h2, h3, h4, h5, h6, th, td, li) {
+  color: #ffffff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #ffffff;
 }
 
 code, kbd, samp, pre {
@@ -116,17 +125,17 @@ input:focus, textarea:focus, select:focus {
 }
 
 .aws-btn-primary {
-  background: var(--sbg-dark-3);
+  background: var(--sbg-purple);
   color: var(--text-primary);
   font-weight: 600;
-  border: 1px solid var(--sbg-dark-3);
+  border: 1px solid var(--sbg-purple);
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   transition: all 0.2s ease;
 }
 .aws-btn-primary:hover {
-  background: var(--sbg-dark-3);
-  border-color: var(--sbg-dark-3);
+  background: var(--sbg-purple);
+  border-color: var(--sbg-purple);
 }
 
 @keyframes spin {

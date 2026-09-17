@@ -153,7 +153,7 @@ export default function AdminPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={handleLogout}
-              className="text-sm font-semibold px-4 py-2 rounded-full border border-[var(--sbg-dark-3)] text-[var(--text-secondary)] hover:bg-[var(--sbg-dark-2)] transition-colors"
+              className="text-sm font-semibold px-4 py-2 rounded-full border border-[var(--sbg-purple)] bg-[var(--sbg-purple)] text-white transition-colors"
             >
               Cerrar Sesión
             </button>
@@ -220,7 +220,7 @@ export default function AdminPage() {
               <div className="space-y-6">
                 <div className="text-center">
                   <p className="text-sm font-bold text-[var(--sbg-green)] mb-2">▶ INICIO DE RALLY</p>
-                  <div className="bg-white p-2 inline-block rounded-xl">
+                  <div className="bg-black p-2 inline-block rounded-xl">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=InicioAWS_Quest2026_7A3nM_1`} alt="QR Inicio" className="w-32 h-32" />
                   </div>
@@ -231,7 +231,7 @@ export default function AdminPage() {
                 
                 <div className="border-t border-[var(--sbg-dark-3)] pt-4 text-center">
                   <p className="text-sm font-bold text-[var(--sbg-orange)] mb-2">⏹ FIN DE RALLY</p>
-                  <div className="bg-white p-2 inline-block rounded-xl">
+                  <div className="bg-black p-2 inline-block rounded-xl">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=FinAWS_Quest2026_7shnM_1`} alt="QR Fin" className="w-32 h-32" />
                   </div>
@@ -273,10 +273,10 @@ export default function AdminPage() {
                       </div>
                       <span className={`self-start text-xs font-bold px-3 py-1 rounded-full ${
                         equipo.tiempo_final
-                          ? 'bg-[var(--sbg-green)] text-black'
+                          ? 'bg-[var(--sbg-green)] text-white'
                           : equipo.tiempo_inicio
-                          ? 'bg-[var(--sbg-blue)] text-black'
-                          : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
+                          ? 'bg-[var(--sbg-blue)] text-white'
+                          : 'bg-[var(--sbg-purple)] text-white'
                       }`}>{status}</span>
                       
                       <div className="flex items-center justify-between mt-auto pt-4">
@@ -322,7 +322,7 @@ export default function AdminPage() {
           <div className="aws-card p-7 sm:p-8 max-w-3xl w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setSelectedTeam(null)}
-              className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              className="absolute top-4 right-4 text-white"
             >
               ✕
             </button>
@@ -358,7 +358,7 @@ export default function AdminPage() {
                         type="button"
                         aria-label={`Restar puntos de estación ${estacionId}`}
                         onClick={() => setStationScores({ ...stationScores, [estacionId]: Math.max(0, (stationScores[estacionId] || 0) - 1) })}
-                        className="w-10 h-10 rounded-lg border border-[var(--sbg-dark-3)] text-xl font-bold hover:bg-[var(--sbg-dark-2)]"
+                        className="w-10 h-10 rounded-lg border border-[var(--sbg-purple)] bg-[var(--sbg-purple)] text-xl font-bold text-white"
                       >
                         −
                       </button>
@@ -373,7 +373,7 @@ export default function AdminPage() {
                         type="button"
                         aria-label={`Sumar puntos de estación ${estacionId}`}
                         onClick={() => setStationScores({ ...stationScores, [estacionId]: (stationScores[estacionId] || 0) + 1 })}
-                        className="w-10 h-10 rounded-lg border border-[var(--sbg-dark-3)] text-xl font-bold hover:bg-[var(--sbg-dark-2)]"
+                        className="w-10 h-10 rounded-lg border border-[var(--sbg-purple)] bg-[var(--sbg-purple)] text-xl font-bold text-white"
                       >
                         +
                       </button>

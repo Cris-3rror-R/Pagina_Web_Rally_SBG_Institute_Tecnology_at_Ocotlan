@@ -138,7 +138,7 @@ export default function HomePage() {
             <p className="text-sm text-[var(--text-secondary)] mb-3">Ya estás participando:</p>
             <Link
               href={`/equipo?id=${existingTeamId}`}
-              className="inline-flex items-center gap-2 text-base font-bold text-[var(--sbg-blue)] hover:text-[var(--sbg-purple)] transition-colors"
+              className="inline-flex items-center gap-2 text-base font-bold text-white"
             >
               <span>Continuar como {existingTeamName}</span>
               <span>→</span>
@@ -154,10 +154,10 @@ export default function HomePage() {
 
       {showTeamModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black" onClick={() => { setShowTeamModal(false); setTeamError(null) }}>
-          <div className="bg-black border border-[var(--sbg-purple)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
+          <div className="bg-black border border-[var(--sbg-green)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => { setShowTeamModal(false); setTeamError(null) }}
-              className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              className="absolute top-4 right-4 text-white"
             >
               ✕
             </button>
@@ -182,7 +182,7 @@ export default function HomePage() {
                   required
                   autoFocus
                   disabled={teamLoading}
-                  className="w-full bg-[var(--sbg-dark)] border-[var(--sbg-dark-3)] focus:border-[var(--sbg-blue)] focus:ring-1 focus:ring-[var(--sbg-blue)]"
+                  className="w-full bg-black border-[var(--sbg-dark-3)] focus:border-[var(--sbg-green)] focus:ring-1 focus:ring-[var(--sbg-green)]"
                 />
               </div>
               <button
@@ -203,7 +203,7 @@ export default function HomePage() {
           <div className="bg-black border border-[var(--sbg-purple)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => { setShowAdminModal(false); setAdminError(null) }}
-              className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+              className="absolute top-4 right-4 text-white"
             >
               ✕
             </button>

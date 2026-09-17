@@ -330,13 +330,13 @@ export default function QRScanPage() {
               <div className="flex gap-3 flex-wrap justify-center">
                 <button
                   onClick={() => router.push(teamId ? `/equipo?id=${teamId}` : '/')}
-                  className="px-6 py-2 rounded-full text-sm font-bold text-black bg-[var(--sbg-green)]"
+                  className="px-6 py-2 rounded-full text-sm font-bold text-white bg-[var(--sbg-green)]"
                 >
                   Ver mi panel
                 </button>
                 <button
                   onClick={reset}
-                  className="px-6 py-2 rounded-full text-sm font-semibold border border-[var(--sbg-dark-3)] text-[var(--text-secondary)] hover:bg-[var(--sbg-dark-2)]"
+                  className="px-6 py-2 rounded-full text-sm font-semibold border border-[var(--sbg-green)] bg-[var(--sbg-green)] text-white"
                 >
                   Escanear otro
                 </button>
@@ -351,7 +351,7 @@ export default function QRScanPage() {
               <p className="text-sm font-bold text-[var(--sbg-pink)] text-center">{statusMsg}</p>
               <button
                 onClick={reset}
-                className="px-6 py-2 rounded-full text-sm font-bold text-white bg-[var(--sbg-orange)]"
+                className="px-6 py-2 rounded-full text-sm font-bold text-white bg-[var(--sbg-green)]"
               >
                 Intentar de nuevo
               </button>
@@ -368,7 +368,7 @@ export default function QRScanPage() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border transition-colors ${
                   torchOn
                     ? 'bg-black border-[var(--sbg-orange)] text-white'
-                    : 'border-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
+                    : 'border-[var(--sbg-green)] bg-[var(--sbg-green)] text-white'
                 }`}
               >
                 🔦 {torchOn ? 'Linterna ON' : 'Linterna'}
@@ -376,7 +376,7 @@ export default function QRScanPage() {
             )}
             <button
               onClick={() => { stopCamera(); setState('idle') }}
-              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border border-[var(--sbg-dark-3)] text-[var(--text-secondary)] hover:bg-[var(--sbg-dark-2)]"
+              className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold border border-[var(--sbg-green)] bg-[var(--sbg-green)] text-white"
             >
               ✕ Cancelar
             </button>
@@ -415,7 +415,7 @@ export default function QRScanPage() {
             <button
               type="submit"
               disabled={!manualCode.trim()}
-              className="min-h-12 px-6 py-3 text-sm font-bold rounded-xl bg-[var(--sbg-blue)] text-white"
+              className="min-h-12 px-6 py-3 text-sm font-bold rounded-xl bg-[var(--sbg-green)] text-white"
             >
               Registrar
             </button>

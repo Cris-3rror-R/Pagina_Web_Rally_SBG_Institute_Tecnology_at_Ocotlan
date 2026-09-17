@@ -135,7 +135,7 @@ export default function LeaderboardPage() {
                     return (
                       <tr
                         key={entry.equipo_id}
-                        className="bg-black hover:bg-[var(--sbg-dark-3)] transition-colors"
+                        className="bg-black hover:bg-[var(--sbg-orange)] transition-colors"
                       >
                         {/* POSICIÓN */}
                         <td className="py-4 px-4 text-center">
@@ -152,10 +152,10 @@ export default function LeaderboardPage() {
                           </p>
                           <span className={`text-xs px-2 py-0.5 rounded-full mt-1 inline-block font-semibold
                             ${entry.estado === 'finalizado'
-                              ? 'bg-[var(--sbg-green)] text-black border border-[var(--sbg-green)]'
+                              ? 'bg-[var(--sbg-green)] text-white border border-[var(--sbg-green)]'
                               : entry.estado === 'en_progreso'
-                              ? 'bg-[var(--sbg-blue)] text-black border border-[var(--sbg-blue)]'
-                              : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'}`}
+                              ? 'bg-[var(--sbg-blue)] text-white border border-[var(--sbg-blue)]'
+                              : 'bg-[var(--sbg-orange)] text-white'}`}
                           >
                             {entry.estado === 'finalizado' ? '✅ Finalizado' : entry.estado === 'en_progreso' ? '⏱️ En Carrera' : '⏳ Esperando'}
                           </span>
@@ -186,10 +186,10 @@ export default function LeaderboardPage() {
                         <td className="py-5 px-5 text-center">
                           <span className={`inline-flex px-3 py-1 rounded-full text-sm font-bold ${
                             entry.estado === 'finalizado'
-                              ? 'bg-[var(--sbg-green)] text-black'
+                              ? 'bg-[var(--sbg-green)] text-white'
                               : entry.estado === 'en_progreso'
-                              ? 'bg-[var(--sbg-blue)] text-black'
-                              : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]'
+                              ? 'bg-[var(--sbg-blue)] text-white'
+                              : 'bg-[var(--sbg-orange)] text-white'
                           }`}>
                             {entry.estado === 'finalizado' ? 'Final' : entry.estado === 'en_progreso' ? 'Activo' : 'Esperando'}
                           </span>

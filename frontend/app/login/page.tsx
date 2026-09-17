@@ -88,7 +88,7 @@ export default function LoginPage() {
 
           <Link
             href="/"
-            className="text-xs text-[var(--text-secondary)] hover:text-white border border-[var(--sbg-dark-3)] px-3 py-1.5 rounded-lg transition"
+            className="text-xs text-white border border-[var(--sbg-dark-3)] px-3 py-1.5 rounded-lg transition"
           >
             ← Volver al Inicio
           </Link>
@@ -111,7 +111,7 @@ export default function LoginPage() {
               className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                 role === 'equipo'
                   ? 'bg-[var(--sbg-orange)] text-[var(--sbg-dark)] shadow'
-                  : 'text-[var(--text-secondary)] hover:text-white'
+                  : 'text-white'
               }`}
             >
               👥 Crear Equipo
@@ -122,7 +122,7 @@ export default function LoginPage() {
               className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                 role === 'admin'
                   ? 'bg-[var(--sbg-blue)] text-white shadow'
-                  : 'text-[var(--text-secondary)] hover:text-white'
+                  : 'text-white'
               }`}
             >
               👨‍💼 Administrador

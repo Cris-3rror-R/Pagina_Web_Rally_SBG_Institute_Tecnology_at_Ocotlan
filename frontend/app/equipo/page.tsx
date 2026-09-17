@@ -156,7 +156,7 @@ function EquipoContent() {
         <p className="text-[var(--sbg-pink)] font-semibold text-center">{error || 'Equipo no encontrado'}</p>
         <button
           onClick={() => router.push('/')}
-          className="mt-2 px-6 py-2 rounded-full bg-[var(--sbg-green)] text-black font-bold text-sm"
+          className="mt-2 px-6 py-2 rounded-full bg-[var(--sbg-green)] text-white font-bold text-sm"
         >
           Ir al inicio
         </button>
@@ -193,10 +193,10 @@ function EquipoContent() {
             {/* Badge de estado */}
             <div className={`hidden sm:flex shrink-0 items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
               estadoEquipo === 'finalizado'
-                ? 'bg-[var(--sbg-green)] text-black border-[var(--sbg-green)]'
+                ? 'bg-[var(--sbg-green)] text-white border-[var(--sbg-green)]'
                 : estadoEquipo === 'en_progreso'
-                ? 'bg-[var(--sbg-blue)] text-black border-[var(--sbg-blue)]'
-                : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)] border-[var(--sbg-dark-3)]'
+                ? 'bg-[var(--sbg-blue)] text-white border-[var(--sbg-blue)]'
+                : 'bg-[var(--sbg-green)] text-white border-[var(--sbg-green)]'
             }`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse inline-block" />
               {estadoEquipo === 'finalizado' ? 'Finalizado' : estadoEquipo === 'en_progreso' ? 'En Carrera' : 'En Espera'}
@@ -227,10 +227,10 @@ function EquipoContent() {
             {/* Badge de estado móvil */}
             <div className={`sm:hidden self-start flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${
               estadoEquipo === 'finalizado'
-                ? 'bg-[var(--sbg-green)] text-black border-[var(--sbg-green)]'
+                ? 'bg-[var(--sbg-green)] text-white border-[var(--sbg-green)]'
                 : estadoEquipo === 'en_progreso'
-                ? 'bg-[var(--sbg-blue)] text-black border-[var(--sbg-blue)]'
-                : 'bg-[var(--sbg-dark-3)] text-[var(--text-secondary)] border-[var(--sbg-dark-3)]'
+                ? 'bg-[var(--sbg-blue)] text-white border-[var(--sbg-blue)]'
+                : 'bg-[var(--sbg-green)] text-white border-[var(--sbg-green)]'
             }`}>
               <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse inline-block" />
               {estadoEquipo === 'finalizado' ? '✅ Finalizado' : estadoEquipo === 'en_progreso' ? '⏱️ En Carrera' : '⏳ En Espera'}
@@ -385,7 +385,7 @@ function EquipoContent() {
             <p className="text-xs text-[var(--text-secondary)] mb-4">Inicia o finaliza tu desafío</p>
             <Link
               href="/qr"
-              className="w-full max-w-xs py-2.5 rounded-full bg-[var(--sbg-green)] text-black font-bold text-sm text-center"
+              className="w-full max-w-xs py-2.5 rounded-full bg-[var(--sbg-green)] text-white font-bold text-sm text-center"
             >
               Abrir Cámara
             </Link>
