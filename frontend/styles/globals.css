@@ -129,10 +129,6 @@ input:focus, textarea:focus, select:focus {
   border-color: var(--sbg-dark-3);
 }
 
-.aws-text-gradient {
-  color: var(--text-primary);
-}
-
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
