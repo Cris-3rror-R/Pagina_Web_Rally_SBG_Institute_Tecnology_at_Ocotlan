@@ -40,9 +40,9 @@ function DashboardRedirectContent() {
   }, [router, searchParams])
 
   return (
-    <div className="min-h-screen bg-[#0F1419] flex items-center justify-center text-white">
+    <div className="min-h-screen bg-[var(--sbg-dark)] flex items-center justify-center text-white">
       <div className="text-center space-y-3">
-        <div className="w-10 h-10 border-4 border-[#FF9900] border-t-transparent rounded-full animate-spin mx-auto" />
+        <div className="w-10 h-10 border-4 border-[var(--sbg-orange)] border-t-transparent rounded-full animate-spin mx-auto" />
         <p className="text-gray-400 text-sm">Redirigiendo a tu panel...</p>
       </div>
     </div>
@@ -53,7 +53,7 @@ export default function DashboardPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-[#0F1419] flex items-center justify-center text-white">
+        <div className="min-h-screen bg-[var(--sbg-dark)] flex items-center justify-center text-white">
           Cargando...
         </div>
       }

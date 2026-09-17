@@ -177,18 +177,16 @@ function EquipoContent() {
     : '--:--'
 
   return (
-    <main className="min-h-screen flex flex-col bg-[var(--sbg-dark)] text-[var(--text-primary)] relative overflow-hidden">
+    <main className="visual-page visual-green min-h-screen flex flex-col bg-[var(--sbg-dark)] text-[var(--text-primary)] relative overflow-hidden">
       {/* Fondo decorativo */}
       <div className="fixed top-[-15%] right-[-10%] w-[50%] sm:w-[35%] h-[40%] bg-[var(--sbg-purple)] rounded-full blur-[150px] opacity-10 pointer-events-none" />
       <div className="fixed bottom-[-15%] left-[-10%] w-[50%] sm:w-[35%] h-[40%] bg-[var(--sbg-blue)] rounded-full blur-[150px] opacity-10 pointer-events-none" />
 
       {/* ── NAVBAR ─────────────────────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]/80 backdrop-blur-md">
+      <nav className="visual-header sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center font-extrabold text-xs sm:text-sm rounded-lg bg-gradient-to-br from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white shadow-[var(--glow-primary)]">
-              AWS
-            </div>
+            <img src="/imagenes/AWS_logo.png" alt="AWS" className="visual-logo" />
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-4 min-w-0">
@@ -217,7 +215,7 @@ function EquipoContent() {
         </div>
       </nav>
 
-      <div className="flex-1 max-w-7xl mx-auto px-4 py-6 sm:py-8 w-full space-y-5 sm:space-y-6 relative z-10">
+      <div className="visual-content flex-1 max-w-7xl mx-auto px-4 py-6 sm:py-8 w-full space-y-5 sm:space-y-6 relative z-10">
 
         {/* ── BANNER BIENVENIDA ──────────────────────────────────────────── */}
         <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-5 sm:p-6">
@@ -255,7 +253,7 @@ function EquipoContent() {
             {
               label: 'Puntaje Total',
               value: totalPuntos,
-              icon: '🏆',
+              icon: '/imagenes/Trofeo_Icono.png',
               color: 'text-[var(--sbg-orange)]',
               border: 'border-[var(--sbg-orange)]/25'
             },
@@ -269,7 +267,7 @@ function EquipoContent() {
             {
               label: estadoEquipo === 'finalizado' ? 'Tiempo Final' : 'Tiempo',
               value: tiempoDisplay,
-              icon: '⏱️',
+              icon: '/imagenes/Reloj.png',
               color: estadoEquipo === 'finalizado' ? 'text-[var(--sbg-green)]' : 'text-[var(--sbg-green)]',
               border: 'border-[var(--sbg-green)]/25'
             },
@@ -284,7 +282,11 @@ function EquipoContent() {
             <div key={stat.label} className={`rounded-2xl border ${stat.border} bg-[var(--sbg-dark-2)] p-4 sm:p-5`}>
               <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <p className="text-xs font-semibold text-[var(--text-secondary)] uppercase tracking-wider leading-tight">{stat.label}</p>
-                <span className="text-lg sm:text-xl">{stat.icon}</span>
+                {stat.icon.startsWith('/') ? (
+                  <img src={stat.icon} alt="" className="h-7 w-7 object-contain" />
+                ) : (
+                  <span className="text-lg sm:text-xl">{stat.icon}</span>
+                )}
               </div>
               <p className={`text-xl sm:text-2xl lg:text-3xl font-extrabold font-mono ${stat.color} break-all`}>
                 {stat.value}
@@ -393,7 +395,7 @@ function EquipoContent() {
             </Link>
           </div>
           <div className="rounded-2xl border border-[var(--sbg-purple)]/30 bg-gradient-to-br from-[var(--sbg-purple)]/5 to-[var(--sbg-dark-2)] p-5 sm:p-6 flex flex-col items-center text-center">
-            <span className="text-3xl sm:text-4xl mb-3">🏆</span>
+            <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-10 w-10 object-contain mb-3" />
             <h3 className="font-bold text-[var(--text-primary)] mb-1 text-base">Clasificación</h3>
             <p className="text-xs text-[var(--text-secondary)] mb-4">Ve tu posición en vivo</p>
             <Link
@@ -405,6 +407,7 @@ function EquipoContent() {
           </div>
         </div>
       </div>
+      <img src="/imagenes/Banner_Verde.png" alt="" className="visual-banner" />
     </main>
   )
 }

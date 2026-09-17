@@ -140,17 +140,15 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col bg-[var(--sbg-dark)] text-[var(--text-primary)] relative overflow-hidden">
+    <main className="visual-page visual-purple min-h-screen flex flex-col bg-[var(--sbg-dark)] text-[var(--text-primary)] relative overflow-hidden">
       <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-[var(--sbg-purple)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-[var(--sbg-blue)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
       
       {/* HEADER */}
-      <header className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]/80 backdrop-blur-md">
+      <header className="visual-header sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 flex items-center justify-center font-bold text-sm rounded bg-gradient-to-br from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white">
-              AWS
-            </div>
+            <img src="/imagenes/AWS_logo.png" alt="AWS" className="visual-logo" />
             <span className="font-bold text-base hidden sm:inline text-white">Panel Admin</span>
             <span className="hidden sm:inline text-base font-bold text-white">· {adminName}</span>
           </Link>
@@ -160,7 +158,7 @@ export default function AdminPage() {
               href="/leaderboard"
               className="text-sm font-bold px-4 py-2 rounded-full bg-gradient-to-r from-[var(--sbg-purple)] to-[var(--sbg-pink)] text-white hover:scale-105 transition-transform shadow-[var(--glow-primary)] flex items-center gap-2"
             >
-              <span>🏆</span>
+              <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
               <span className="hidden sm:inline">Clasificación</span>
             </Link>
             <button
@@ -173,7 +171,7 @@ export default function AdminPage() {
         </div>
       </header>
 
-      <div className="flex-1 max-w-6xl mx-auto w-full px-4 py-8 space-y-8 relative z-10">
+      <div className="visual-content flex-1 max-w-6xl mx-auto w-full px-4 py-8 space-y-8 relative z-10">
         
         {/* BANNER */}
         <div className="rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark-2)] p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -201,7 +199,7 @@ export default function AdminPage() {
                   </div>
                 )}
                 <div>
-                  <label className="block text-xs font-semibold mb-2 text-[#8b949e]">Nombre del Equipo</label>
+                  <label className="block text-xs font-semibold mb-2 text-[var(--text-secondary)]">Nombre del Equipo</label>
                   <input
                     type="text"
                     value={newTeamName}
@@ -266,22 +264,22 @@ export default function AdminPage() {
               <span className="text-xs text-[var(--text-secondary)]">Actualización automática</span>
             </div>
             {loading ? (
-              <div className="p-8 text-center text-[#8b949e]">Cargando equipos...</div>
+              <div className="p-8 text-center text-[var(--text-secondary)]">Cargando equipos...</div>
             ) : teamsData.length === 0 ? (
-              <div className="aws-card p-8 text-center text-[#8b949e]">No hay equipos creados aún.</div>
+              <div className="aws-card p-8 text-center text-[var(--text-secondary)]">No hay equipos creados aún.</div>
             ) : (
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-5">
                 {teamsData.map(({ equipo, progress }) => {
                   const stationsCompleted = progress.filter(p => p.completado).length
                   const status = equipo.tiempo_final ? 'Finalizado' : equipo.tiempo_inicio ? 'Participando' : 'Sin iniciar'
                   return (
-                    <div key={equipo.equipo_id} className="aws-card p-6 flex flex-col min-h-[220px] hover:border-[#7c3aed] transition-colors group">
+                    <div key={equipo.equipo_id} className="aws-card p-6 flex flex-col min-h-[220px] hover:border-[var(--sbg-purple)] transition-colors group">
                       <div className="flex items-start justify-between mb-5">
                         <div>
                           <p className="text-xs uppercase tracking-wider text-[var(--text-secondary)] mb-1">Equipo</p>
-                          <h3 className="text-xl font-extrabold text-[#f0f6fc] group-hover:text-[#7c3aed] transition-colors">{equipo.nombre}</h3>
+                          <h3 className="text-xl font-extrabold text-[var(--text-primary)] group-hover:text-[var(--sbg-purple)] transition-colors">{equipo.nombre}</h3>
                         </div>
-                        <span className="text-xs text-[#8b949e] font-mono">{equipo.equipo_id.split('-')[0]}</span>
+                        <span className="text-xs text-[var(--text-secondary)] font-mono">{equipo.equipo_id.split('-')[0]}</span>
                       </div>
                       <span className={`self-start text-xs font-bold px-3 py-1 rounded-full ${
                         equipo.tiempo_final
@@ -293,11 +291,11 @@ export default function AdminPage() {
                       
                       <div className="flex items-center justify-between mt-auto pt-4">
                         <div>
-                          <p className="text-xs text-[#8b949e] uppercase">Puntos</p>
+                          <p className="text-xs text-[var(--text-secondary)] uppercase">Puntos</p>
                           <p className="font-extrabold text-2xl text-[var(--sbg-orange)]">{equipo.puntaje_total}</p>
                         </div>
                         <div className="text-right">
-                          <p className="text-xs text-[#8b949e] uppercase">Estaciones</p>
+                          <p className="text-xs text-[var(--text-secondary)] uppercase">Estaciones</p>
                           <p className="font-extrabold text-2xl text-[var(--sbg-blue)]">{stationsCompleted}/4</p>
                         </div>
                       </div>
@@ -317,18 +315,20 @@ export default function AdminPage() {
         </div>
       </div>
 
+      <img src="/imagenes/Banner_Morado.png" alt="" className="visual-banner" />
+
       {/* MODAL GESTION PUNTOS */}
       {selectedTeam && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedTeam(null)}>
           <div className="aws-card p-7 sm:p-8 max-w-3xl w-full relative shadow-2xl" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setSelectedTeam(null)}
-              className="absolute top-4 right-4 text-[#8b949e] hover:text-[#f0f6fc]"
+              className="absolute top-4 right-4 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
             >
               ✕
             </button>
-            <h3 className="text-2xl font-extrabold text-[#f0f6fc] mb-1">Gestionar puntos</h3>
-            <p className="text-sm text-[#7c3aed] font-semibold mb-6">{selectedTeam.equipo.nombre}</p>
+            <h3 className="text-2xl font-extrabold text-[var(--text-primary)] mb-1">Gestionar puntos</h3>
+            <p className="text-sm text-[var(--sbg-purple)] font-semibold mb-6">{selectedTeam.equipo.nombre}</p>
 
             {gradeError && (
               <div className="mb-4 p-3 rounded-md border border-red-500/30 bg-red-500/10 text-red-400 text-xs">
@@ -338,19 +338,19 @@ export default function AdminPage() {
 
             <div className="space-y-4 max-h-[65vh] overflow-y-auto pr-2">
               {[1, 2, 3, 4].map(estacionId => (
-                <div key={estacionId} className="p-5 sm:p-6 rounded-2xl border border-[#21262d] bg-[#0d1117] flex flex-col sm:flex-row sm:items-center gap-5">
+                <div key={estacionId} className="p-5 sm:p-6 rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)] flex flex-col sm:flex-row sm:items-center gap-5">
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-[#8b949e]">Estación</p>
+                    <p className="text-xs uppercase tracking-wider text-[var(--text-secondary)]">Estación</p>
                     <h4 className="text-xl font-bold">Estación {estacionId}</h4>
                   </div>
                   
                   <div className="flex items-center gap-4 flex-wrap">
-                    <label className="flex items-center gap-2 text-sm text-[#8b949e] cursor-pointer">
+                    <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer">
                       <input
                         type="checkbox"
                         checked={stationCompleted[estacionId] || false}
                         onChange={(e) => setStationCompleted({ ...stationCompleted, [estacionId]: e.target.checked })}
-                        className="accent-[#7c3aed]"
+                        className="accent-[var(--sbg-purple)]"
                       />
                       Completado
                     </label>
@@ -359,7 +359,7 @@ export default function AdminPage() {
                         type="button"
                         aria-label={`Restar puntos de estación ${estacionId}`}
                         onClick={() => setStationScores({ ...stationScores, [estacionId]: Math.max(0, (stationScores[estacionId] || 0) - 1) })}
-                        className="w-10 h-10 rounded-lg border border-[#30363d] text-xl font-bold hover:bg-[#161b22]"
+                        className="w-10 h-10 rounded-lg border border-[var(--sbg-dark-3)] text-xl font-bold hover:bg-[var(--sbg-dark-2)]"
                       >
                         −
                       </button>
@@ -374,16 +374,16 @@ export default function AdminPage() {
                         type="button"
                         aria-label={`Sumar puntos de estación ${estacionId}`}
                         onClick={() => setStationScores({ ...stationScores, [estacionId]: (stationScores[estacionId] || 0) + 1 })}
-                        className="w-10 h-10 rounded-lg border border-[#30363d] text-xl font-bold hover:bg-[#161b22]"
+                        className="w-10 h-10 rounded-lg border border-[var(--sbg-dark-3)] text-xl font-bold hover:bg-[var(--sbg-dark-2)]"
                       >
                         +
                       </button>
-                      <span className="text-xs text-[#8b949e]">pts</span>
+                      <span className="text-xs text-[var(--text-secondary)]">pts</span>
                     </div>
                     <button
                       onClick={() => handleSavePoints(estacionId)}
                       disabled={grading}
-                      className="px-4 py-2.5 text-sm font-bold bg-[#7c3aed] text-white rounded-xl hover:bg-[#6d28d9] transition-colors disabled:opacity-50"
+                      className="px-4 py-2.5 text-sm font-bold bg-[var(--sbg-purple)] text-white rounded-xl hover:bg-[var(--sbg-pink)] transition-colors disabled:opacity-50"
                     >
                       {grading ? '...' : 'Guardar'}
                     </button>
@@ -391,7 +391,7 @@ export default function AdminPage() {
                 </div>
               ))}
             </div>
-            <div className="mt-6 pt-4 border-t border-[#21262d] text-right">
+            <div className="mt-6 pt-4 border-t border-[var(--sbg-dark-3)] text-right">
                <button
                   onClick={() => { setSelectedTeam(null); fetchTeams(); }}
                   className="aws-btn-primary text-sm"

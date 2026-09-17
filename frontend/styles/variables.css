@@ -2,33 +2,33 @@
 
 :root {
   /* Colors - Primary Palette */
-  --color-primary: #0066cc;
-  --color-primary-dark: #0052a3;
-  --color-primary-light: #e6f0ff;
+  --color-primary: #44b4ff;
+  --color-primary-dark: #161d26;
+  --color-primary-light: #44b4ff;
 
   /* Colors - Secondary Palette */
-  --color-secondary: #ff6600;
-  --color-secondary-dark: #e55a00;
-  --color-secondary-light: #ffe6cc;
+  --color-secondary: #ff9900;
+  --color-secondary-dark: #ff9900;
+  --color-secondary-light: #ff9900;
 
   /* Colors - Status Colors */
-  --color-success: #00cc66;
-  --color-success-dark: #009933;
-  --color-success-light: #e6ffe6;
+  --color-success: #03e582;
+  --color-success-dark: #03e582;
+  --color-success-light: #03e582;
 
-  --color-warning: #ffaa00;
+  --color-warning: #ff9900;
   --color-warning-dark: #ff9900;
-  --color-warning-light: #fffaeb;
+  --color-warning-light: #ff9900;
 
-  --color-danger: #cc0000;
-  --color-danger-dark: #990000;
-  --color-danger-light: #ffe6e6;
+  --color-danger: #ff57ea;
+  --color-danger-dark: #ff57ea;
+  --color-danger-light: #ff57ea;
 
   /* Colors - Neutral Palette */
-  --color-light: #f5f5f5;
-  --color-light-border: #e0e0e0;
-  --color-gray: #808080;
-  --color-dark: #1a1a1a;
+  --color-light: #ffffff;
+  --color-light-border: #656871;
+  --color-gray: #656871;
+  --color-dark: #161d26;
 
   /* Spacing Scale */
   --spacing-xs: 0.25rem;

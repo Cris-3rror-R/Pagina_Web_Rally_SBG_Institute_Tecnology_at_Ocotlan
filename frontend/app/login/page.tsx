@@ -75,14 +75,12 @@ export default function LoginPage() {
 
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#0F1419] via-[#1A2332] to-[#232F3E] text-white flex flex-col justify-between">
+    <main className="min-h-screen bg-[var(--sbg-dark)] text-white flex flex-col justify-between">
       {/* Navbar */}
-      <header className="border-b border-white/10 bg-[#0F1419]/80 backdrop-blur-md">
+      <header className="border-b border-white/10 bg-[var(--sbg-dark)]/80 backdrop-blur-md">
         <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition">
-            <div className="w-8 h-8 rounded-md bg-[#FF9900] text-[#0F1419] font-black flex items-center justify-center text-sm">
-              AWS
-            </div>
+            <img src="/imagenes/AWS_logo.png" alt="AWS" className="h-10 w-20 object-contain" />
             <span className="font-bold text-sm hidden sm:inline text-white">
               AWS CHALLENGE
             </span>
@@ -99,20 +97,20 @@ export default function LoginPage() {
 
       {/* Tarjeta de Acceso */}
       <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-[#161F2E] border border-white/15 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-6">
+        <div className="bg-[var(--sbg-dark-2)] border border-white/15 rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-6">
           <div className="text-center space-y-1">
             <h1 className="text-2xl font-black text-white">Acceso al Rally</h1>
             <p className="text-xs text-gray-400">Selecciona tu perfil de acceso</p>
           </div>
 
           {/* Selector de rol */}
-          <div className="flex bg-[#0F1419] p-1 rounded-xl border border-white/10">
+          <div className="flex bg-[var(--sbg-dark)] p-1 rounded-xl border border-white/10">
             <button
               type="button"
               onClick={() => setRole('equipo')}
               className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                 role === 'equipo'
-                  ? 'bg-[#FF9900] text-[#0F1419] shadow'
+                  ? 'bg-[var(--sbg-orange)] text-[var(--sbg-dark)] shadow'
                   : 'text-gray-400 hover:text-white'
               }`}
             >
@@ -123,7 +121,7 @@ export default function LoginPage() {
               onClick={() => setRole('admin')}
               className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
                 role === 'admin'
-                  ? 'bg-[#0A66C2] text-white shadow'
+                  ? 'bg-[var(--sbg-blue)] text-white shadow'
                   : 'text-gray-400 hover:text-white'
               }`}
             >
@@ -151,14 +149,14 @@ export default function LoginPage() {
                   placeholder="Ej: CyberTeam AWS"
                   required
                   disabled={teamLoading}
-                  className="w-full px-4 py-3 bg-[#0F1419] border border-white/20 rounded-xl text-white outline-none focus:border-[#FF9900] text-sm"
+                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-white/20 rounded-xl text-white outline-none focus:border-[var(--sbg-orange)] text-sm"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={teamLoading || !teamName.trim()}
-                className="w-full py-3 px-6 bg-gradient-to-r from-[#FF9900] to-[#FF7700] hover:from-[#FF8800] hover:to-[#FF6600] text-[#0F1419] font-black text-base rounded-xl shadow-lg transition transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                className="w-full py-3 px-6 bg-[var(--sbg-orange)] hover:bg-[var(--sbg-pink)] text-[var(--sbg-dark)] font-black text-base rounded-xl shadow-lg transition transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
               >
                 {teamLoading ? 'Creando...' : 'Crear'}
               </button>
@@ -185,7 +183,7 @@ export default function LoginPage() {
                   placeholder="admin o admin@rally.com"
                   required
                   disabled={adminLoading}
-                  className="w-full px-4 py-3 bg-[#0F1419] border border-white/20 rounded-xl text-white outline-none focus:border-[#0A66C2] text-sm"
+                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-white/20 rounded-xl text-white outline-none focus:border-[var(--sbg-blue)] text-sm"
                 />
               </div>
 
@@ -200,14 +198,14 @@ export default function LoginPage() {
                   placeholder="••••••••••••"
                   required
                   disabled={adminLoading}
-                  className="w-full px-4 py-3 bg-[#0F1419] border border-white/20 rounded-xl text-white outline-none focus:border-[#0A66C2] text-sm"
+                  className="w-full px-4 py-3 bg-[var(--sbg-dark)] border border-white/20 rounded-xl text-white outline-none focus:border-[var(--sbg-blue)] text-sm"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={adminLoading || !adminUser.trim() || !adminPassword.trim()}
-                className="w-full py-3 px-6 bg-gradient-to-r from-[#0A66C2] to-[#004C99] hover:from-[#0B74DB] hover:to-[#0A5BA6] text-white font-black text-base rounded-xl shadow-lg transition transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+                className="w-full py-3 px-6 bg-[var(--sbg-blue)] hover:bg-[var(--sbg-purple)] text-white font-black text-base rounded-xl shadow-lg transition transform hover:scale-[1.02] active:scale-95 disabled:opacity-50"
               >
                 {adminLoading ? 'Verificando...' : 'Entrar'}
               </button>
@@ -217,7 +215,7 @@ export default function LoginPage() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full border-t border-white/10 py-4 px-4 text-center text-xs text-gray-500 bg-[#0F1419]">
+      <footer className="w-full border-t border-white/10 py-4 px-4 text-center text-xs text-[var(--text-secondary)] bg-[var(--sbg-dark)]">
         AWS CHALLENGE © 2026
       </footer>
     </main>

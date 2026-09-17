@@ -44,18 +44,16 @@ export default function LeaderboardPage() {
   )
 
   return (
-    <main className="min-h-screen flex flex-col relative overflow-hidden bg-[var(--sbg-dark)] text-[var(--text-primary)]">
+    <main className="visual-page visual-orange min-h-screen flex flex-col relative overflow-hidden bg-[var(--sbg-dark)] text-[var(--text-primary)]">
       {/* Background gradients */}
       <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-[var(--sbg-purple)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-[var(--sbg-blue)] rounded-full blur-[130px] opacity-15 pointer-events-none" />
 
       {/* HEADER */}
-      <header className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]/80 backdrop-blur-md">
+      <header className="visual-header sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 flex items-center justify-center font-bold text-sm rounded bg-gradient-to-br from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white">
-              AWS
-            </div>
+            <img src="/imagenes/AWS_logo.png" alt="AWS" className="visual-logo" />
             <span className="font-bold text-base hidden sm:inline text-[var(--text-primary)]">Clasificación Global</span>
           </Link>
 
@@ -79,7 +77,7 @@ export default function LeaderboardPage() {
         </div>
       </header>
 
-      <div className="flex-1 max-w-7xl mx-auto w-full px-4 py-10 space-y-8 relative z-10">
+      <div className="visual-content flex-1 max-w-7xl mx-auto w-full px-4 py-10 space-y-8 relative z-10">
         {/* CABECERA */}
         <section className="space-y-2">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[var(--sbg-blue)] via-[var(--sbg-purple)] to-[var(--sbg-pink)]">
@@ -231,6 +229,7 @@ export default function LeaderboardPage() {
           La clasificación se actualiza automáticamente. En caso de empate de puntos, gana el equipo con menor tiempo.
         </p>
       </div>
+      <img src="/imagenes/Banner_Naranja.png" alt="" className="visual-banner" />
     </main>
   )
 }

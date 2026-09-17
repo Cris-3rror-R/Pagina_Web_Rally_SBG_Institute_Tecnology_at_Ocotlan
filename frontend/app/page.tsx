@@ -86,32 +86,30 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col relative overflow-hidden bg-[var(--sbg-dark)]">
+    <main className="visual-page visual-blue min-h-screen flex flex-col relative overflow-hidden bg-[var(--sbg-dark)]">
       {/* Background gradients */}
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[var(--sbg-purple)] rounded-full blur-[120px] opacity-20 pointer-events-none" />
       <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-[var(--sbg-blue)] rounded-full blur-[120px] opacity-20 pointer-events-none" />
 
       {/* HEADER */}
-      <header className="sticky top-0 z-30 border-b border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)]/80 backdrop-blur-md">
+      <header className="visual-header sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center font-bold text-sm rounded bg-gradient-to-br from-[var(--sbg-blue)] to-[var(--sbg-purple)] text-white shadow-[var(--glow-primary)]">
-              AWS
-            </div>
+            <img src="/imagenes/AWS_logo.png" alt="AWS" className="visual-logo" />
           </div>
           
           <Link
             href="/leaderboard"
             className="text-sm font-bold px-6 py-2.5 rounded-full bg-gradient-to-r from-[var(--sbg-purple)] to-[var(--sbg-pink)] text-white hover:scale-105 transition-transform shadow-[var(--glow-primary)] flex items-center gap-2"
           >
-            <span>🏆</span>
+            <img src="/imagenes/Trofeo_Icono.png" alt="" className="h-6 w-6 object-contain" />
             <span>Clasificación Global</span>
           </Link>
         </div>
       </header>
 
       {/* HERO */}
-      <section className="flex-1 flex flex-col items-center justify-center px-4 py-20 text-center relative z-10">
+      <section className="visual-content flex-1 flex flex-col items-center justify-center px-4 py-20 text-center relative z-10">
         
         <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6 max-w-4xl mx-auto text-transparent bg-clip-text bg-gradient-to-r from-white via-[var(--sbg-blue)] to-[var(--sbg-green)] leading-tight">
           AWS CHALLENGE
@@ -154,6 +152,8 @@ export default function HomePage() {
       </section>
 
       {/* MODAL CREAR EQUIPO */}
+      <img src="/imagenes/Banner_Azul.png" alt="" className="visual-banner" />
+
       {showTeamModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={() => { setShowTeamModal(false); setTeamError(null) }}>
           <div className="bg-[var(--sbg-dark-2)] border border-[var(--sbg-purple)] shadow-[var(--glow-primary)] rounded-2xl p-6 sm:p-8 max-w-md w-full relative" onClick={e => e.stopPropagation()}>
