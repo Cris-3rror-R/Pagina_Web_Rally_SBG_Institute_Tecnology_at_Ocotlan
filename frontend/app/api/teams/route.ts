@@ -76,10 +76,10 @@ export async function POST(request: Request) {
        console.error('Advertencia: No se pudo cargar el equipo post-trigger:', fetchError)
     }
 
-    // 2. Inicializar las 4 estaciones para el equipo
-    const stationsInit = [1, 2, 3, 4].map((estacion_id) => ({
+    // 2. Inicializar las 5 estaciones para el equipo
+    const stationsInit = Array.from({ length: 5 }, (_, index) => ({
       equipo_id: newTeamId,
-      estacion_id,
+      estacion_id: index + 1,
       puntos_ganados: 0,
       completado: false
     }))

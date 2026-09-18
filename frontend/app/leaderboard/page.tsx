@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { LeaderboardEntry } from '@/types/rally'
 
+const TOTAL_STATIONS = 5
+
 export default function LeaderboardPage() {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([])
   const [loading, setLoading] = useState(true)
@@ -165,10 +167,10 @@ export default function LeaderboardPage() {
                         <td className="py-5 px-5 text-center">
                           <div className="inline-flex flex-col items-center gap-1">
                             <span className="font-bold text-base">
-                              {entry.estaciones_completadas}/4
+                              {entry.estaciones_completadas}/{TOTAL_STATIONS}
                             </span>
                             <div className="flex gap-1">
-                              {[1,2,3,4].map(i => (
+                              {Array.from({ length: TOTAL_STATIONS }, (_, index) => index + 1).map(i => (
                                 <div
                                   key={i}
                                   className={`w-2 h-2 rounded-full ${i <= entry.estaciones_completadas ? 'bg-[var(--sbg-green)]' : 'bg-[var(--sbg-dark-3)]'}`}

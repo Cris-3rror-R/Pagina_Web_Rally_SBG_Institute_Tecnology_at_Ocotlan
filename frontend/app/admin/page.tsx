@@ -11,6 +11,8 @@ interface AdminTeamData {
   progress: TeamStationProgress[]
 }
 
+const TOTAL_STATIONS = 5
+
 export default function AdminPage() {
   const router = useRouter()
   const [teamsData, setTeamsData] = useState<AdminTeamData[]>([])
@@ -29,20 +31,43 @@ export default function AdminPage() {
 
   const fetchTeams = async () => {
     try {
-      const res = await fetch(`/api/teams?t=${Date.now()}`, { cache: 'no-store' })
-      if (res.ok) {
-        const data = await res.json()
+      const [teamsRes, stationsRes] = await Promise.all([
+        fetch(`/api/teams?t=${Date.now()}`, { cache: 'no-store' }),
+        fetch(`/api/stations?t=${Date.now()}`, { cache: 'no-store' })
+      ])
+
+      if (teamsRes.ok) {
+        const data = await teamsRes.json()
         const teams: Equipo[] = data.teams
         const progreso = data.progreso
-        
+        const stationData = stationsRes.ok ? ((await stationsRes.json()).stations || []) : []
+        const stationsById = new Map((stationData as any[]).map((station: any) => [Number(station.estacion_id), station]))
+
         const merged: AdminTeamData[] = teams.map(t => {
           const teamProgress = progreso.filter((p: any) => p.equipo_id === t.equipo_id)
-          const stations: TeamStationProgress[] = [1, 2, 3, 4].map(sid => {
+          const stations: TeamStationProgress[] = Array.from({ length: TOTAL_STATIONS }, (_, index) => {
+            const sid = index + 1
             const sp = teamProgress.find((p: any) => p.estacion_id === sid)
+            const stationInfo = stationsById.get(sid) || {
+              estacion_id: sid,
+              nombre: `Estación ${sid}`,
+              encargados: '',
+              descripcion: '',
+              ubicacion_palabra: '',
+              puntos_totales: 0
+            }
+
             return {
-              station: { estacion_id: sid, nombre: `Estación ${sid}`, encargados: '', descripcion: '', ubicacion_palabra: '', puntos_totales: 0 },
-              completado: sp ? sp.completado : false,
-              puntos_ganados: sp ? sp.puntos_ganados : 0
+              station: {
+                estacion_id: sid,
+                nombre: stationInfo.nombre || `Estación ${sid}`,
+                encargados: stationInfo.encargados || '',
+                descripcion: stationInfo.descripcion || '',
+                ubicacion_palabra: stationInfo.ubicacion_palabra || '',
+                puntos_totales: Number(stationInfo.puntos_totales || 0)
+              },
+              completado: sp ? Boolean(sp.completado) : false,
+              puntos_ganados: sp ? Number(sp.puntos_ganados || 0) : 0
             }
           })
           return { equipo: t, progress: stations }
@@ -286,7 +311,7 @@ export default function AdminPage() {
                         </div>
                         <div className="text-right">
                           <p className="text-xs text-[var(--text-secondary)] uppercase">Estaciones</p>
-                          <p className="font-extrabold text-2xl text-[var(--sbg-blue)]">{stationsCompleted}/4</p>
+                          <p className="font-extrabold text-2xl text-[var(--sbg-blue)]">{stationsCompleted}/{TOTAL_STATIONS}</p>
                         </div>
                       </div>
 
@@ -336,59 +361,70 @@ export default function AdminPage() {
             )}
 
             <div className="space-y-4 max-h-[65vh] overflow-y-auto pr-2">
-              {[1, 2, 3, 4].map(estacionId => (
-                <div key={estacionId} className="p-5 sm:p-6 rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)] flex flex-col sm:flex-row sm:items-center gap-5">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-[var(--text-secondary)]">Estación</p>
-                    <h4 className="text-xl font-bold">Estación {estacionId}</h4>
-                  </div>
-                  
-                  <div className="flex items-center gap-4 flex-wrap">
-                    <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={stationCompleted[estacionId] || false}
-                        onChange={(e) => setStationCompleted({ ...stationCompleted, [estacionId]: e.target.checked })}
-                        className="accent-[var(--sbg-purple)]"
-                      />
-                      Completado
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        aria-label={`Restar puntos de estación ${estacionId}`}
-                        onClick={() => setStationScores({ ...stationScores, [estacionId]: Math.max(0, (stationScores[estacionId] || 0) - 1) })}
-                        className="w-10 h-10 rounded-lg border border-[var(--sbg-purple)] bg-[var(--sbg-purple)] text-xl font-bold text-white"
-                      >
-                        −
-                      </button>
-                      <input
-                        type="number"
-                        min="0"
-                        value={stationScores[estacionId] || 0}
-                        onChange={(e) => setStationScores({ ...stationScores, [estacionId]: parseInt(e.target.value) || 0 })}
-                        className="w-24 h-10 py-2 px-2 text-center text-base rounded-lg"
-                      />
-                      <button
-                        type="button"
-                        aria-label={`Sumar puntos de estación ${estacionId}`}
-                        onClick={() => setStationScores({ ...stationScores, [estacionId]: (stationScores[estacionId] || 0) + 1 })}
-                        className="w-10 h-10 rounded-lg border border-[var(--sbg-purple)] bg-[var(--sbg-purple)] text-xl font-bold text-white"
-                      >
-                        +
-                      </button>
-                      <span className="text-xs text-[var(--text-secondary)]">pts</span>
+              {Array.from({ length: TOTAL_STATIONS }, (_, index) => {
+                const estacionId = index + 1
+                const stationMeta = selectedTeam.progress.find((p) => p.station.estacion_id === estacionId)?.station
+
+                return (
+                  <div key={estacionId} className="p-5 sm:p-6 rounded-2xl border border-[var(--sbg-dark-3)] bg-[var(--sbg-dark)] flex flex-col sm:flex-row sm:items-center gap-5">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs uppercase tracking-wider text-[var(--text-secondary)]">Estación</p>
+                      <h4 className="text-xl font-bold">{stationMeta?.nombre || `Estación ${estacionId}`}</h4>
+                      {stationMeta?.encargados && (
+                        <p className="mt-2 text-xs text-[var(--text-secondary)]">👤 {stationMeta.encargados}</p>
+                      )}
+                      {stationMeta?.ubicacion_palabra && (
+                        <p className="mt-1 text-xs text-[var(--text-secondary)]">📍 {stationMeta.ubicacion_palabra}</p>
+                      )}
                     </div>
-                    <button
-                      onClick={() => handleSavePoints(estacionId)}
-                      disabled={grading}
-                      className="px-4 py-2.5 text-sm font-bold bg-[var(--sbg-purple)] text-white rounded-xl"
-                    >
-                      {grading ? '...' : 'Guardar'}
-                    </button>
+                    
+                    <div className="flex items-center gap-4 flex-wrap">
+                      <label className="flex items-center gap-2 text-sm text-[var(--text-secondary)] cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={stationCompleted[estacionId] || false}
+                          onChange={(e) => setStationCompleted({ ...stationCompleted, [estacionId]: e.target.checked })}
+                          className="accent-[var(--sbg-purple)]"
+                        />
+                        Completado
+                      </label>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          aria-label={`Restar puntos de estación ${estacionId}`}
+                          onClick={() => setStationScores({ ...stationScores, [estacionId]: Math.max(0, (stationScores[estacionId] || 0) - 1) })}
+                          className="w-10 h-10 rounded-lg border border-[var(--sbg-purple)] bg-[var(--sbg-purple)] text-xl font-bold text-white"
+                        >
+                          −
+                        </button>
+                        <input
+                          type="number"
+                          min="0"
+                          value={stationScores[estacionId] || 0}
+                          onChange={(e) => setStationScores({ ...stationScores, [estacionId]: parseInt(e.target.value) || 0 })}
+                          className="w-24 h-10 py-2 px-2 text-center text-base rounded-lg"
+                        />
+                        <button
+                          type="button"
+                          aria-label={`Sumar puntos de estación ${estacionId}`}
+                          onClick={() => setStationScores({ ...stationScores, [estacionId]: (stationScores[estacionId] || 0) + 1 })}
+                          className="w-10 h-10 rounded-lg border border-[var(--sbg-purple)] bg-[var(--sbg-purple)] text-xl font-bold text-white"
+                        >
+                          +
+                        </button>
+                        <span className="text-xs text-[var(--text-secondary)]">pts</span>
+                      </div>
+                      <button
+                        onClick={() => handleSavePoints(estacionId)}
+                        disabled={grading}
+                        className="px-4 py-2.5 text-sm font-bold bg-[var(--sbg-purple)] text-white rounded-xl"
+                      >
+                        {grading ? '...' : 'Guardar'}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
             <div className="mt-6 pt-4 border-t border-[var(--sbg-dark-3)] text-right">
                <button

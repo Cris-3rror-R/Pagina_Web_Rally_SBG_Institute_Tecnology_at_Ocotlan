@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { formatDuration } from '@/utils/rally-service'
 import { Equipo, TeamStationProgress } from '@/types/rally'
 
+const TOTAL_STATIONS = 5
+
 function EquipoContent() {
   const [team, setTeam] = useState<Equipo | null>(null)
   const [progress, setProgress] = useState<TeamStationProgress[]>([])
@@ -165,7 +167,7 @@ function EquipoContent() {
   }
 
   // ─── DATOS COMPUTADOS ────────────────────────────────────────────────────────
-  const totalStations = progress.length
+  const totalStations = Math.max(TOTAL_STATIONS, progress.length)
   const completadas = progress.filter(p => p.completado).length
   const totalPuntos = progress.reduce((s, p) => s + p.puntos_ganados, 0)
   const estadoEquipo = team.tiempo_final ? 'finalizado' : team.tiempo_inicio ? 'en_progreso' : 'no_iniciado'
@@ -311,68 +313,89 @@ function EquipoContent() {
               <p className="text-[var(--text-secondary)] text-xs mt-1">Consulta con el administrador.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              {progress.map((prog, idx) => (
-                <div
-                  key={prog.station.estacion_id}
-                  className={`rounded-2xl p-4 sm:p-5 border transition-all ${
-                    prog.completado
-                      ? 'border-[var(--sbg-green)] bg-black'
-                      : 'border-[var(--sbg-dark-3)] bg-black'
-                  }`}
-                >
-                  {/* Header de estación */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold px-2 py-1 rounded-full bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]">
-                      #{idx + 1}
-                    </span>
-                    <span className="text-xl">{prog.completado ? '✅' : '🔒'}</span>
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+              {Array.from({ length: TOTAL_STATIONS }, (_, index) => {
+                const prog = progress.find(item => Number(item.station.estacion_id) === index + 1) || {
+                  station: {
+                    estacion_id: index + 1,
+                    nombre: `Estación ${index + 1}`,
+                    descripcion: '',
+                    encargados: '',
+                    ubicacion_palabra: '',
+                    puntos_totales: 0
+                  },
+                  completado: false,
+                  puntos_ganados: 0
+                }
 
-                  {/* Nombre */}
-                  <h3 className={`font-bold text-sm sm:text-base mb-1 leading-tight ${
-                    prog.completado ? 'text-[var(--sbg-green)]' : 'text-[var(--text-primary)]'
-                  }`}>
-                    {prog.station.nombre}
-                  </h3>
+                return (
+                  <div
+                    key={prog.station.estacion_id}
+                    className={`rounded-2xl p-4 sm:p-5 border transition-all ${
+                      prog.completado
+                        ? 'border-[var(--sbg-green)] bg-black'
+                        : 'border-[var(--sbg-dark-3)] bg-black'
+                    }`}
+                  >
+                    {/* Header de estación */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-bold px-2 py-1 rounded-full bg-[var(--sbg-dark-3)] text-[var(--text-secondary)]">
+                        #{index + 1}
+                      </span>
+                      <span className="text-xl">{prog.completado ? '✅' : '🔒'}</span>
+                    </div>
 
-                  {/* Descripción */}
-                  {prog.station.descripcion && (
-                    <p className="text-xs text-[var(--text-secondary)] mb-3 line-clamp-2 leading-relaxed">
-                      {prog.station.descripcion}
-                    </p>
-                  )}
-
-                  {/* Encargados */}
-                  {prog.station.encargados && (
-                    <p className="text-xs text-[var(--text-secondary)] mb-3 font-medium">
-                      👤 {prog.station.encargados}
-                    </p>
-                  )}
-
-                  {/* Puntos */}
-                  <div className="flex items-center justify-between pt-3 border-t border-[var(--sbg-dark-3)] mt-auto">
-                    <span className="text-xs text-[var(--text-secondary)] font-semibold uppercase tracking-wide">Puntos</span>
-                    <span className={`text-xl sm:text-2xl font-extrabold font-mono ${
+                    {/* Nombre */}
+                    <h3 className={`font-bold text-sm sm:text-base mb-1 leading-tight ${
                       prog.completado ? 'text-[var(--sbg-green)]' : 'text-[var(--text-primary)]'
                     }`}>
-                      {prog.puntos_ganados}
-                    </span>
-                  </div>
+                      {prog.station.nombre}
+                    </h3>
 
-                  {/* Barra de puntos */}
-                  {prog.station.puntos_totales > 0 && (
-                    <div className="mt-2 w-full h-1 rounded-full bg-[var(--sbg-dark-3)] overflow-hidden">
-                      <div
-                        className={`h-full rounded-full transition-all duration-500 ${
-                          prog.completado ? 'bg-[var(--sbg-green)]' : 'bg-[var(--sbg-dark-3)]'
-                        }`}
-                        style={{ width: prog.completado ? `${Math.min(100, (prog.puntos_ganados / prog.station.puntos_totales) * 100)}%` : '0%' }}
-                      />
+                    {/* Descripción */}
+                    {prog.station.descripcion && (
+                      <p className="text-xs text-[var(--text-secondary)] mb-3 line-clamp-2 leading-relaxed">
+                        {prog.station.descripcion}
+                      </p>
+                    )}
+
+                    {/* Encargados */}
+                    {prog.station.encargados && (
+                      <p className="text-xs text-[var(--text-secondary)] mb-1 font-medium">
+                        👤 {prog.station.encargados}
+                      </p>
+                    )}
+
+                    {prog.station.ubicacion_palabra && (
+                      <p className="text-xs text-[var(--text-secondary)] mb-3 font-medium">
+                        📍 {prog.station.ubicacion_palabra}
+                      </p>
+                    )}
+
+                    {/* Puntos */}
+                    <div className="flex items-center justify-between pt-3 border-t border-[var(--sbg-dark-3)] mt-auto">
+                      <span className="text-xs text-[var(--text-secondary)] font-semibold uppercase tracking-wide">Puntos</span>
+                      <span className={`text-xl sm:text-2xl font-extrabold font-mono ${
+                        prog.completado ? 'text-[var(--sbg-green)]' : 'text-[var(--text-primary)]'
+                      }`}>
+                        {prog.puntos_ganados}
+                      </span>
                     </div>
-                  )}
-                </div>
-              ))}
+
+                    {/* Barra de puntos */}
+                    {prog.station.puntos_totales > 0 && (
+                      <div className="mt-2 w-full h-1 rounded-full bg-[var(--sbg-dark-3)] overflow-hidden">
+                        <div
+                          className={`h-full rounded-full transition-all duration-500 ${
+                            prog.completado ? 'bg-[var(--sbg-green)]' : 'bg-[var(--sbg-dark-3)]'
+                          }`}
+                          style={{ width: prog.completado ? `${Math.min(100, (prog.puntos_ganados / prog.station.puntos_totales) * 100)}%` : '0%' }}
+                        />
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           )}
         </div>

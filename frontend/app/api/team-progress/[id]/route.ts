@@ -56,7 +56,21 @@ export async function GET(
       }
     })
 
-    const stationsProgress = (stations || []).map((st: any) => ({
+    const normalizedStations = Array.from({ length: 5 }, (_, index) => {
+      const estacionId = index + 1
+      const existing = (stations || []).find((st: any) => Number(st.estacion_id) === estacionId)
+
+      return {
+        estacion_id: estacionId,
+        nombre: existing?.nombre || `Estación ${estacionId}`,
+        encargados: existing?.encargados || '',
+        descripcion: existing?.descripcion || '',
+        ubicacion_palabra: existing?.ubicacion_palabra || '',
+        puntos_totales: Number(existing?.puntos_totales || 0),
+      }
+    })
+
+    const stationsProgress = normalizedStations.map((st: any) => ({
       station: st,
       completado: progresoMap[st.estacion_id]?.completado ?? false,
       puntos_ganados: progresoMap[st.estacion_id]?.puntos_ganados ?? 0
